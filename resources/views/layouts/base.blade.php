@@ -9,21 +9,13 @@
         @else
             <title>{{ config('app.name') }}</title>
         @endif
-
-        <!-- Favicon -->
-		<link rel="shortcut icon" href="{{ url(asset('favicon.ico')) }}">
-
-        <!-- Fonts -->
+        <link rel="shortcut icon" href="{{ url(asset('favicon.ico')) }}">
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-
-        <!-- Styles -->
+        {{--                <link rel="stylesheet" href="{{ asset('css/tw.css') }}">--}}
         <link rel="stylesheet" href="{{ url(mix('css/app.css')) }}">
         @livewireStyles
-
-        <!-- Scripts -->
+{{--        <script src="{{ asset('js/echo.js') }}"></script>--}}
         <script src="{{ url(mix('js/app.js')) }}" defer></script>
-
-        <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
 
@@ -31,5 +23,9 @@
         @yield('body')
 
         @livewireScripts
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <x-livewire-alert::scripts />
+        <script src="{{ asset('js/spa.js') }}" data-turbolinks-eval="false"></script>
+
     </body>
 </html>
