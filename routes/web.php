@@ -25,29 +25,25 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', \App\Http\Livewire\Admin\HomeComponent::class)->name('home');
     Route::get('/atoms', \App\Http\Livewire\Admin\AtomComponent::class)->name('atom');
+    Route::get('/alpine', \App\Http\Livewire\Admin\AlpineComponent::class)->name('alpine');
 });
 
 
 
 
 
-Route::get('optimize', function () {
-    Artisan::call('optimize');
+Route::get('optimize', function () {Artisan::call('optimize');
     return "php artisan optimized successfully";
 })->name('optimize');
-Route::get('migrate', function () {
-    Artisan::call('migrate');
+Route::get('migrate', function () {Artisan::call('migrate');
     return "php artisan migrate successfully";
 })->name('migrate');
-Route::get('migrate-fresh', function () {
-    Artisan::call('migrate:fresh --seed');
+Route::get('migrate-fresh', function () {Artisan::call('migrate:fresh --seed');
     return "php artisan migrate-fresh successfully";
 })->name('migrate.fresh');
-Route::get('migrate-rollback', function () {
-    Artisan::call('migrate:rollback');
+Route::get('migrate-rollback', function () {Artisan::call('migrate:rollback');
     return "php artisan migrate-rollback successfully";
 })->name('migrate.rollback');
-Route::get('db-seed', function () {
-    Artisan::call('db:seed');
+Route::get('db-seed', function () {Artisan::call('db:seed');
     return "php artisan db:seed successfully";
 })->name('db.seed');

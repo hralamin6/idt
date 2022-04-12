@@ -14,77 +14,40 @@
     </div>
     <div class="overflow-hidden h-screen scrollbar-none overflow-y-scroll scrollbar-thumb-gray-400 scrollbar-track-white  scrollbar-thin">
         <div class="capitalize">
-            <a href="{{route('admin.home')}}" class="navMenuLink {{Route::is('admin.dashboard')?'navActive':'navInactive'}}">
-                <x-h-o-home class="w-5"/>
-                <span class="">{{__('dashboard')}}</span>
-            </a>
-            <a href="{{route('admin.atom')}}" class="navMenuLink {{Route::is('admin.atom')?'navActive':'navInactive'}}">
-                <x-h-o-home class="w-5"/>
-                <span class="">{{__('Atoms')}}</span>
-            </a>
-{{--            <a href="{{route('admin.quiz')}}" class="navMenuLink {{Route::is('admin.quiz')?'navActive':'navInactive'}}">--}}
-{{--                <x-h-o-home class="w-5"/>--}}
-{{--                <span class="">{{__('quiz')}}</span>--}}
-{{--            </a>--}}
-            {{--            <div @if(Route::is('admin.setup.*')) x-data="{setup: true}" @else x-data="{setup: false}" @endif>--}}
-            <div  x-data="{setup: @if(Route::is('admin.setup.*')) true @else false @endif}">
-                <div @click="setup= !setup"  class="navMenuLink {{Route::is('admin.setup.*')?'navActive':'navInactive'}}">
+            <x-menu :route="'admin.home'"><x-slot name="icon"><x-h-o-home class="w-5"/></x-slot> Dashboard</x-menu>
+            <x-menu :route="'admin.atom'"><x-slot name="icon"><x-h-o-home class="w-5"/></x-slot> Atoms</x-menu>
+            <x-menu :route="'admin.alpine'"><x-slot name="icon"><x-h-o-home class="w-5"/></x-slot> Alpine</x-menu>
+
+            <div  x-data="{setup: @if(Route::is('admin.*')) true @else false @endif}">
+                <div @click="setup= !setup"  class="subNavMenuLink {{Route::is('admin.*')?'subNavActive':'subNavInactive'}}">
                     <x-h-o-home class="w-5"/><span class="">{{__('setup')}}</span>
                     <x-h-o-chevron-left x-show="!setup" class="w-4 ml-auto"/><x-h-o-chevron-down x-show="setup" class="w-4 ml-auto"/>
                 </div>
-{{--                <div x-show="setup" class="" x-collapse>--}}
-{{--                    <a href="{{route('admin.setup.label')}}" class="subNavMenuLink {{Route::is('admin.setup.label')?'subNavActive':'subNavInactive'}}">--}}
-{{--                        <x-h-o-sparkles class="w-4"/>--}}
-{{--                        <span class="">{{__('class')}}</span>--}}
-{{--                    </a>--}}
-{{--                    <a href="{{route('admin.setup.group')}}" class="subNavMenuLink {{Route::is('admin.setup.group')?'subNavActive':'subNavInactive'}}">--}}
-{{--                        <x-h-o-sparkles class="w-4"/>--}}
-{{--                        <span class="">{{__('group')}}</span>--}}
-{{--                    </a>--}}
-{{--                    <a href="{{route('admin.setup.shift')}}" class="subNavMenuLink {{Route::is('admin.setup.shift')?'subNavActive':'subNavInactive'}}">--}}
-{{--                        <x-h-o-light-bulb class="w-4"/>--}}
-{{--                        <span class="">{{__('shift')}}</span>--}}
-{{--                    </a>--}}
-{{--                    <a href="{{route('admin.setup.medium')}}" class="subNavMenuLink {{Route::is('admin.setup.medium')?'subNavActive':'subNavInactive'}}">--}}
-{{--                        <x-h-o-light-bulb class="w-4"/>--}}
-{{--                        <span class="">{{__('medium')}}</span>--}}
-{{--                    </a>--}}
-{{--                    <a href="{{route('admin.setup.session')}}" class="subNavMenuLink {{Route::is('admin.setup.session')?'subNavActive':'subNavInactive'}}">--}}
-{{--                        <x-h-o-light-bulb class="w-4"/>--}}
-{{--                        <span class="">{{__('session')}}</span>--}}
-{{--                    </a>--}}
-{{--                    <a href="{{route('admin.setup.section')}}" class="subNavMenuLink {{Route::is('admin.setup.section')?'subNavActive':'subNavInactive'}}">--}}
-{{--                        <x-h-o-light-bulb class="w-4"/>--}}
-{{--                        <span class="">{{__('section')}}</span>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
+
+                <div x-cloak x-show="setup" class="" x-collapse
+                     x-transition:enter="transition ease-out duration-300"
+                     x-transition:enter-start="opacity-0 scale-90"
+                     x-transition:enter-end="opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-300"
+                     x-transition:leave-start="opacity-100 scale-100"
+                     x-transition:leave-end="opacity-0 scale-90">
+                    <x-sub-menu :route="'admin.home'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> Dashboard</x-sub-menu>
+                    <x-sub-menu :route="'admin.atom'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> Atoms</x-sub-menu>
+                    <x-sub-menu :route="'admin.alpine'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> Alpine</x-sub-menu>
+                </div>
             </div>
+
             <div  x-data="{artisan: false}">
                 <div @click="artisan= !artisan"  class="navMenuLink navInactive">
                     <x-h-o-home class="w-5"/><span class="">{{__('Artisan')}}</span>
                     <x-h-o-chevron-left x-show="!artisan" class="w-4 ml-auto"/><x-h-o-chevron-down x-show="artisan" class="w-4 ml-auto"/>
                 </div>
-                <div x-show="artisan" class="" x-collapse>
-                    <a href="{{route('optimize')}}" class="m-2 px-3 py-2 flex justify-start rounded-md gap-2 hover:bg-gray-200 hover:text-gray-700 dark:hover:bg-gray-600 dark:hover:text-gray-100 {{Route::is('optimize')?'subNavActive':'subNavInactive'}}">
-                        <x-h-o-light-bulb class="w-4"/>
-                        <span class="">{{__('optimize')}}</span>
-                    </a>
-                    <a href="{{route('migrate')}}" class="subNavMenuLink {{Route::is('migrate')?'subNavActive':'subNavInactive'}}">
-                        <x-h-o-light-bulb class="w-4"/>
-                        <span class="">{{__('migrate')}}</span>
-                    </a>
-                    <a href="{{route('migrate.fresh')}}" class="subNavMenuLink {{Route::is('migrate.fresh')?'subNavActive':'subNavInactive'}}">
-                        <x-h-o-light-bulb class="w-4"/>
-                        <span class="">{{__('migrate fresh')}}</span>
-                    </a>
-                    <a href="{{route('migrate.rollback')}}" class="subNavMenuLink {{Route::is('migrate.rollback')?'subNavActive':'subNavInactive'}}">
-                        <x-h-o-light-bulb class="w-4"/>
-                        <span class="">{{__('migrate rollback')}}</span>
-                    </a>
-                    <a href="{{route('db.seed')}}" class="subNavMenuLink {{Route::is('db.seed')?'subNavActive':'subNavInactive'}}">
-                        <x-h-o-light-bulb class="w-4"/>
-                        <span class="">{{__('db seed')}}</span>
-                    </a>
+                <div x-cloak x-show="artisan" class="" x-collapse>
+                    <x-sub-menu :route="'optimize'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> opt</x-sub-menu>
+                    <x-sub-menu :route="'migrate'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> mgr</x-sub-menu>
+                    <x-sub-menu :route="'migrate.fresh'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> mfs</x-sub-menu>
+                    <x-sub-menu :route="'migrate.rollback'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> mrb</x-sub-menu>
+                    <x-sub-menu :route="'db.seed'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> dbs</x-sub-menu>
                 </div>
             </div>
         </div>

@@ -10,8 +10,8 @@
             <title>{{ config('app.name') }}</title>
         @endif
         <link rel="shortcut icon" href="{{ url(asset('favicon.ico')) }}">
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-        {{--                <link rel="stylesheet" href="{{ asset('css/tw.css') }}">--}}
+{{--        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">--}}
+        <link rel="stylesheet" href="{{ asset('css/tw.css') }}">
         <link rel="stylesheet" href="{{ url(mix('css/app.css')) }}">
         @livewireStyles
 {{--        <script src="{{ asset('js/echo.js') }}"></script>--}}
@@ -23,7 +23,8 @@
         @yield('body')
 
         @livewireScripts
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{{--        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>--}}
+        <script src="{{ asset('js/sa.js') }}"></script>
         <x-livewire-alert::scripts />
         <script src="{{ asset('js/spa.js') }}" data-turbolinks-eval="false"></script>
 

@@ -15,6 +15,15 @@ class HomeComponent extends Component
     use WithFileUploads;
     use LivewireAlert;
     public $photo;
+    public $atom;
+    public $showModal = false;
+    public $showDeleteModal = false;
+
+    public function showModal($id)
+    {
+        $this->atom = Atom::find($id);
+        $this->showModal = true;
+    }
 
 
     public function import(Request $request){

@@ -7,19 +7,19 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class AtomComponent extends Component
+class AlpineComponent extends Component
 {
     use WithPagination;
     use LivewireAlert;
     public $search = '';
     protected $queryString = [
-        'page', 'search', 'searchBy', 'itemPerPage'
+        'page'
     ];
     public $selectedRows = [];
     public $selectPageRows = false;
     public $itemPerPage;
+    public $atms;
     public $orderBy = 'id';
-    public $searchBy = 'id';
     public $orderDirection = 'asc';
     protected $listeners = ['deleteMultiple', 'deleteSingle'];
 
@@ -41,22 +41,24 @@ class AtomComponent extends Component
 
     public function getDataProperty()
     {
-        return Atom::where($this->searchBy, 'like', '%'.$this->search.'%')->orderBy($this->orderBy, $this->orderDirection)->paginate($this->itemPerPage, ['category', 'id', 'name', 'number', 'symbol', 'atomic_mass', 'xpos', 'ypos', 'phase'])->withQueryString();
+        return Atom::orderBy($this->orderBy, $this->orderDirection)->paginate($this->itemPerPage, ['category', 'id', 'name', 'number', 'symbol', 'atomic_mass'])->toArray();
     }
 
-    public function updating($p, $v)
+    public function updatingSearch()
 
     {
-        if (in_array($p, array('itemPerPage','search','searchBy'))){
-            $this->resetPage();
-        }
 
+        $this->resetPage();
+
+    }
+
+    public function mount()
+    {
+        $this->atms = Atom::all();
     }
 
     public function render()
     {
-        $atoms = $this->data;
-
-        return view('livewire.admin.atom-component', compact('atoms'));
+        return view('livewire.admin.alpine-component');
     }
 }
