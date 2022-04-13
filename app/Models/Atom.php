@@ -10,6 +10,12 @@ class Atom extends Model
     protected $guarded = [];
     use HasFactory;
 
+    public function options(Atom $atom)
+    {
+        $f = substr($atom->symbol, 0, 1);
+        return Atom::where('id', '!=', $atom->id)->where('symbol', 'like', $f.'%')->inRandomOrder()->limit(3)->get()->merge(Atom::where('id', $atom->id)->get());
+    }
+
     public function getType()
     {
         if ($this->category=='alkaline earth metal'){

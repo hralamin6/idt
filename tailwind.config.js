@@ -11,8 +11,6 @@ module.exports = {
                 '14': 'repeat(14, minmax(0, 1fr))',
                 '15': 'repeat(15, minmax(0, 1fr))',
                 '16': 'repeat(16, minmax(0, 1fr))',
-
-                // Complex site-specific column configuration
                 'footer': '200px minmax(900px, 1fr) 100px',
             },
             gridColumn: {
@@ -23,18 +21,6 @@ module.exports = {
                 'span-20': 'span 20 / span 20',
                 'span-21': 'span 21 / span 21',
             },
-            // gridColumnEnd: {
-            //     '13': '13',
-            //     '14': '14',
-            //     '15': '15',
-            //     '16': '16',
-            //     '17': '17',
-            //     '18': '18',
-            //     '19': '19',
-            //     '20': '20',
-            //     '21': '21',
-            //     '22': '22',
-            // },
             gridColumnStart: {
                 '13': '13',
                 '14': '14',
@@ -86,9 +72,20 @@ module.exports = {
         defaultExtractor: (content) => content.match(/[\w-/.:]+(?<!:)/g) || [],
         whitelistPatterns: [/-active$/, /-enter$/, /-leave-to$/, /show$/],
     },
+    daisyui: {
+        styled: true,
+        themes: true,
+        base: true,
+        utils: true,
+        logs: true,
+        rtl: false,
+        prefix: "",
+        darkTheme: "light",
+    },
     plugins: [
         require('tailwind-scrollbar'),
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
+        require("daisyui"),
     ],
 };

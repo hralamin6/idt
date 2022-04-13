@@ -21,6 +21,10 @@ Route::middleware('auth')->group(function () {Route::get('email/verify', Verify:
 Route::middleware('auth')->group(function () {
     Route::get('email/verify/{id}/{hash}', EmailVerificationController::class)->middleware('signed')->name('verification.verify');
     Route::post('logout', LogoutController::class)->name('logout');
+
+    Route::get('/quiz/name-to-symbol', \App\Http\Livewire\Quiz\NameToSymbolComponent::class)->name('quiz.name.symbol');
+    Route::get('/quiz/symbol-to-name', \App\Http\Livewire\Quiz\SymbolToNameComponent::class)->name('quiz.symbol.name');
+
 });
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', \App\Http\Livewire\Admin\HomeComponent::class)->name('home');
