@@ -2,7 +2,7 @@
     <div class="flex justify-between gap-6 p-4 relative inline-block">
         <div class="flex justify-start space-x-4 md:space-x-9 text-gray-500 dark:text-gray-200 text-sm z-0" :class="{'hidden': search}">
             <button @click="nav= !nav" x-on:click.stop><x-h-o-menu class="w-5 md:hidden"/></button>
-            <a href="{{route('admin.home')}}" class="hidden md:block capitalize">home</a>
+            <a href="{{route('admin.home')}}" class="hidden md:block capitalize">{{$is}}</a>
             <a href="{{route('admin.home')}}" class="hidden md:block capitalize">contact</a>
 
         </div>

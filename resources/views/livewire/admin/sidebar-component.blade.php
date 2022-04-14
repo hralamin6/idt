@@ -15,10 +15,10 @@
     <div class="overflow-hidden h-screen scrollbar-none overflow-y-scroll scrollbar-thumb-gray-400 scrollbar-track-white  scrollbar-thin">
         <div class="capitalize">
             <x-menu :route="'admin.home'"><x-slot name="icon"><x-h-o-home class="w-5"/></x-slot> Dashboard</x-menu>
-            <x-menu :route="'admin.atom'"><x-slot name="icon"><x-h-o-home class="w-5"/></x-slot> Atoms</x-menu>
-            <x-menu :route="'admin.alpine'"><x-slot name="icon"><x-h-o-home class="w-5"/></x-slot> Alpine</x-menu>
-            <x-menu :route="'quiz.name.symbol'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> Name-Symbol</x-menu>
-            <x-menu :route="'quiz.symbol.name'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> Symbol-Name</x-menu>
+            <x-menu :route="'admin.atom'"><x-slot name="icon"><x-h-o-home class="w-5"/></x-slot> Learn Atoms</x-menu>
+{{--            <x-menu :route="'admin.alpine'"><x-slot name="icon"><x-h-o-home class="w-5"/></x-slot> Alpine</x-menu>--}}
+            <x-menu :route="'practise.index'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> practise</x-menu>
+
 
             <div  x-data="{setup: @if(Route::is('admin.*')) true @else false @endif}">
                 <div @click="setup= !setup"  class="subNavMenuLink {{Route::is('admin.*')?'subNavActive':'subNavInactive'}}">

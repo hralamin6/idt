@@ -21,11 +21,26 @@ Route::middleware('auth')->group(function () {Route::get('email/verify', Verify:
 Route::middleware('auth')->group(function () {
     Route::get('email/verify/{id}/{hash}', EmailVerificationController::class)->middleware('signed')->name('verification.verify');
     Route::post('logout', LogoutController::class)->name('logout');
-
-    Route::get('/quiz/name-to-symbol', \App\Http\Livewire\Quiz\NameToSymbolComponent::class)->name('quiz.name.symbol');
-    Route::get('/quiz/symbol-to-name', \App\Http\Livewire\Quiz\SymbolToNameComponent::class)->name('quiz.symbol.name');
-
 });
+Route::middleware('auth')->prefix('practise')->name('practise.')->group(function () {
+    Route::get('/', \App\Http\Livewire\Practise\IndexComponent::class)->name('index');
+    Route::get('/symbol-name', \App\Http\Livewire\Practise\SymbolName::class)->name('symbol.name');
+    Route::get('/symbol-number', \App\Http\Livewire\Practise\SymbolNumber::class)->name('symbol.number');
+    Route::get('/symbol-mass', \App\Http\Livewire\Practise\SymbolMass::class)->name('symbol.mass');
+    Route::get('/symbol-group', \App\Http\Livewire\Practise\SymbolGroup::class)->name('symbol.group');
+    Route::get('/symbol-period', \App\Http\Livewire\Practise\SymbolPeriod::class)->name('symbol.period');
+    Route::get('/symbol-phase', \App\Http\Livewire\Practise\SymbolPhase::class)->name('symbol.phase');
+    Route::get('/symbol-category', \App\Http\Livewire\Practise\SymbolCategory::class)->name('symbol.category');
+
+    Route::get('/name-symbol', \App\Http\Livewire\Practise\NameSymbol::class)->name('name.symbol');
+    Route::get('/number-symbol', \App\Http\Livewire\Practise\NumberSymbol::class)->name('number.symbol');
+    Route::get('/mass-symbol', \App\Http\Livewire\Practise\MassSymbol::class)->name('mass.symbol');
+    Route::get('/group-symbol', \App\Http\Livewire\Practise\GroupSymbol::class)->name('group.symbol');
+    Route::get('/period-symbol', \App\Http\Livewire\Practise\PeriodSymbol::class)->name('period.symbol');
+    Route::get('/phase-symbol', \App\Http\Livewire\Practise\PhaseSymbol::class)->name('phase.symbol');
+    Route::get('/category-symbol', \App\Http\Livewire\Practise\CategorySymbol::class)->name('category.symbol');
+});
+
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', \App\Http\Livewire\Admin\HomeComponent::class)->name('home');
     Route::get('/atoms', \App\Http\Livewire\Admin\AtomComponent::class)->name('atom');

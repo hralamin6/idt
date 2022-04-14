@@ -10,10 +10,23 @@ class Atom extends Model
     protected $guarded = [];
     use HasFactory;
 
-    public function options(Atom $atom)
+    public function options(Atom $atom, $field)
     {
         $f = substr($atom->symbol, 0, 1);
-        return Atom::where('id', '!=', $atom->id)->where('symbol', 'like', $f.'%')->inRandomOrder()->limit(3)->get()->merge(Atom::where('id', $atom->id)->get());
+        $atom = Atom::where('id', '!=', $atom->id)->where($field, 'like', $f.'%')->inRandomOrder()->limit(3)->get()->merge(Atom::where('id', $atom->id)->get());
+        return $atom->shuffle();
+
+    }
+    public function int_options(Atom $atom, $field)
+    {
+        $atom = Atom::where('id', '!=', $atom->id)->where('id', '<=', $atom->id+5)->where('id', '>=', $atom->id-5)->inRandomOrder()->limit(3)->get()->merge(Atom::where('id', $atom->id)->get());
+        return $atom->shuffle();
+    }
+    public function pos_options(Atom $atom, $field)
+    {
+        $atom = Atom::where('id', '!=', $atom->id)->where($field, '!=', $atom->xpos)->inRandomOrder()->limit(3)->get()->merge(Atom::where('id', $atom->id)->get());
+        return $atom->shuffle();
+
     }
 
     public function getType()
