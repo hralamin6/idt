@@ -10,7 +10,7 @@ use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Auth\Verify;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
-Route::view('/', 'welcome')->name('home');
+//Route::view('/', 'welcome')->name('home');
 Route::middleware('guest')->group(function () {Route::get('login', Login::class)->name('login');Route::get('register', Register::class)->name('register');
 });
 Route::get('password/reset', Email::class)->name('password.request');
@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::get('email/verify/{id}/{hash}', EmailVerificationController::class)->middleware('signed')->name('verification.verify');
     Route::post('logout', LogoutController::class)->name('logout');
 });
-Route::middleware('auth')->prefix('practise')->name('practise.')->group(function () {
+Route::prefix('practise')->name('practise.')->group(function () {
     Route::get('/', \App\Http\Livewire\Practise\IndexComponent::class)->name('index');
     Route::get('/symbol-name', \App\Http\Livewire\Practise\SymbolName::class)->name('symbol.name');
     Route::get('/symbol-number', \App\Http\Livewire\Practise\SymbolNumber::class)->name('symbol.number');
@@ -41,7 +41,7 @@ Route::middleware('auth')->prefix('practise')->name('practise.')->group(function
     Route::get('/category-symbol', \App\Http\Livewire\Practise\CategorySymbol::class)->name('category.symbol');
 });
 
-Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+Route::name('admin.')->group(function () {
     Route::get('/', \App\Http\Livewire\Admin\HomeComponent::class)->name('home');
     Route::get('/atoms', \App\Http\Livewire\Admin\AtomComponent::class)->name('atom');
     Route::get('/alpine', \App\Http\Livewire\Admin\AlpineComponent::class)->name('alpine');

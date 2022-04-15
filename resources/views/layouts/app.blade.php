@@ -21,14 +21,14 @@
             <livewire:admin.header-component />
             <main class="h-full overflow-y-auto dark:bg-darkBg">
                 <div class="m-2">
-                    <div class="flex justify-between gap-4 mb-2">
-                        <p class="text-gray-700 dark:text-gray-200 text-xl font-semibold">Dashboard v2</p>
-                        <div class="flex text-sm gap-1">
-                            <span class="text-blue-500 dark:text-blue-400">Home</span>
-                            <span class="text-gray-500 dark:text-gray-200">/</span>
-                            <span class="text-gray-500 dark:text-gray-300">Dashboard v2</span>
-                        </div>
-                    </div>
+{{--                    <div class="flex justify-between gap-4 mb-2">--}}
+{{--                        <p class="text-gray-700 dark:text-gray-200 text-xl font-semibold">Dashboard v2</p>--}}
+{{--                        <div class="flex text-sm gap-1">--}}
+{{--                            <span class="text-blue-500 dark:text-blue-400">Home</span>--}}
+{{--                            <span class="text-gray-500 dark:text-gray-200">/</span>--}}
+{{--                            <span class="text-gray-500 dark:text-gray-300">Dashboard v2</span>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     @yield('content')
                     @isset($slot)
                         {{ $slot }}
