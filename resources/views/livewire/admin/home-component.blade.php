@@ -117,29 +117,29 @@
         </x-slot>
     </x-dialog-modal>
 
-{{--    <form wire:submit.prevent="import">--}}
-{{--            @csrf--}}
-{{--            <div--}}
+    <form wire:submit.prevent="import">
+            @csrf
+            <div
 
-{{--                x-data="{ isUploading: false, progress: 0 }"--}}
+                x-data="{ isUploading: false, progress: 0 }"
 
-{{--                x-on:livewire-upload-start="isUploading = true"--}}
+                x-on:livewire-upload-start="isUploading = true"
 
-{{--                x-on:livewire-upload-finish="isUploading = false"--}}
+                x-on:livewire-upload-finish="isUploading = false"
 
-{{--                x-on:livewire-upload-error="isUploading = false"--}}
+                x-on:livewire-upload-error="isUploading = false"
 
-{{--                x-on:livewire-upload-progress="progress = $event.detail.progress"--}}
+                x-on:livewire-upload-progress="progress = $event.detail.progress"
 
-{{--            >--}}
-{{--            <input type="file" wire:model="photo">--}}
-{{--                @error('photo') <span class="error">{{ $message }}</span> @enderror--}}
-{{--        </form>--}}
-{{--    <button type="submit" class="btn btn-primary">Import Users</button>--}}
-{{--    <div wire:loading wire:target="photo, import">Uploading...</div>--}}
-{{--    <div x-show="isUploading">--}}
-{{--        <progress max="100" x-bind:value="progress"></progress>--}}
-{{--    </div>--}}
+            >
+            <input type="file" wire:model="photo">
+                @error('photo') <span class="error">{{ $message }}</span> @enderror
+        </form>
+    <button type="submit" class="btn btn-primary">Import Users</button>
+    <div wire:loading wire:target="photo, import">Uploading...</div>
+    <div x-show="isUploading">
+        <progress max="100" x-bind:value="progress"></progress>
+    </div>
 
     <div class="lg:m-2 m-1 w-max overflow-visible sm:w-full">
         <div class="text-2x grid grid-cols-18 gap-0.5 lg:gap-1">

@@ -10,7 +10,6 @@ use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Auth\Verify;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
-//Route::view('/', 'welcome')->name('home');
 Route::middleware('guest')->group(function () {Route::get('login', Login::class)->name('login');Route::get('register', Register::class)->name('register');
 });
 Route::get('password/reset', Email::class)->name('password.request');
@@ -47,6 +46,13 @@ Route::name('admin.')->group(function () {
     Route::get('/alpine', \App\Http\Livewire\Admin\AlpineComponent::class)->name('alpine');
 });
 
+Route::middleware('auth')->name('admin.')->group(function () {
+    Route::get('/quiz', \App\Http\Livewire\Admin\QuizComponent::class)->name('quiz');
+    Route::get('/quiz/{quiz}/create', \App\Http\Livewire\Admin\QuestionOption::class)->name('question.option.create');
+    Route::get('/quiz/{quiz}/edit', \App\Http\Livewire\Admin\QuestionOptionEdit::class)->name('question.option.edit');
+    Route::get('/quiz/{quiz}/exam', \App\Http\Livewire\Admin\ExamComponent::class)->name('question.option.exam');
+    Route::get('/quiz/{quiz}/result', \App\Http\Livewire\Admin\ResultComponent::class)->name('question.option.result');
+});
 
 
 

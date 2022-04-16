@@ -16,8 +16,8 @@
         <div class="capitalize">
             <x-menu :route="'admin.home'"><x-slot name="icon"><x-h-o-home class="w-5"/></x-slot> Dashboard</x-menu>
             <x-menu :route="'admin.atom'"><x-slot name="icon"><x-h-o-home class="w-5"/></x-slot> Learn Atoms</x-menu>
-{{--            <x-menu :route="'admin.alpine'"><x-slot name="icon"><x-h-o-home class="w-5"/></x-slot> Alpine</x-menu>--}}
             <x-menu :route="'practise.index'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> practise</x-menu>
+            <x-menu :route="'admin.quiz'"><x-slot name="icon"><x-h-o-home class="w-5"/></x-slot> Quiz</x-menu>
 
 
 {{--            <div  x-data="{setup: @if(Route::is('admin.*')) true @else false @endif}">--}}
@@ -39,19 +39,19 @@
 {{--                </div>--}}
 {{--            </div>--}}
 
-{{--            <div  x-data="{artisan: false}">--}}
-{{--                <div @click="artisan= !artisan"  class="navMenuLink navInactive">--}}
-{{--                    <x-h-o-home class="w-5"/><span class="">{{__('Artisan')}}</span>--}}
-{{--                    <x-h-o-chevron-left x-show="!artisan" class="w-4 ml-auto"/><x-h-o-chevron-down x-show="artisan" class="w-4 ml-auto"/>--}}
-{{--                </div>--}}
-{{--                <div x-cloak x-show="artisan" class="" x-collapse>--}}
-{{--                    <x-sub-menu :route="'optimize'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> opt</x-sub-menu>--}}
-{{--                    <x-sub-menu :route="'migrate'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> mgr</x-sub-menu>--}}
-{{--                    <x-sub-menu :route="'migrate.fresh'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> mfs</x-sub-menu>--}}
-{{--                    <x-sub-menu :route="'migrate.rollback'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> mrb</x-sub-menu>--}}
-{{--                    <x-sub-menu :route="'db.seed'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> dbs</x-sub-menu>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            <div  x-data="{artisan: false}">
+                <div @click="artisan= !artisan"  class="navMenuLink navInactive">
+                    <x-h-o-home class="w-5"/><span class="">{{__('Artisan')}}</span>
+                    <x-h-o-chevron-left x-show="!artisan" class="w-4 ml-auto"/><x-h-o-chevron-down x-show="artisan" class="w-4 ml-auto"/>
+                </div>
+                <div x-cloak x-show="artisan" class="" x-collapse>
+                    <x-sub-menu :route="'optimize'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> opt</x-sub-menu>
+                    <x-sub-menu :route="'migrate'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> mgr</x-sub-menu>
+                    <x-sub-menu :route="'migrate.fresh'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> mfs</x-sub-menu>
+                    <x-sub-menu :route="'migrate.rollback'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> mrb</x-sub-menu>
+                    <x-sub-menu :route="'db.seed'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> dbs</x-sub-menu>
+                </div>
+            </div>
         </div>
     </div>
 </nav>
