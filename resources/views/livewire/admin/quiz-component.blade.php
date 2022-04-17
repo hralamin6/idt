@@ -45,7 +45,7 @@ Swal.fire({
 ">
     <aside class="border dark:border-gray-600 row-span-4 bg-white dark:bg-darkSidebar" x-data="{rows: @entangle('selectedRows').defer, selectPage: @entangle('selectPageRows')}">
         <div class="flex justify-between gap-3 bg-white border dark:border-gray-600 dark:bg-darkSidebar px-4 py-2">
-            <p class="text-gray-600 dark:text-gray-200">Products Table</p>
+            <p class="text-gray-600 dark:text-gray-200">Quiz Table</p>
             <div class="flex justify-center gap-4 text-gray-500 dark:text-gray-300 capitalize">
                 <button @click="$wire.openModal()" class="px-1 mt-1 mb-0.5 text-white pb-0.5 font-semibold text-xs bg-pink-400 rounded-lg">@lang('add new')</button>
                 <button class="" @click="openTable = !openTable">
@@ -92,7 +92,6 @@ Swal.fire({
                             <th class="px-4 py-3">@lang('name')</th>
                             <th class="px-4 py-3">@lang('total question')</th>
                             <th class="px-4 py-3">@lang('seconds per question')</th>
-                            <th class="px-4 py-3">@lang('status')</th>
                             <th class="px-4 py-3">@lang('created at')</th>
                             <th class="px-4 py-3">@lang('date time')</th>
                             <th class="px-4 py-3">@lang('action')</th>
@@ -110,18 +109,16 @@ Swal.fire({
                                 <td class="px-4 py-3 text-sm">{{$item->name}}</td>
                                 <td class="px-4 py-3 text-xs">{{$item->total_question}}</td>
                                 <td class="px-4 py-3 text-xs">{{$item->seconds_per_item}}</td>
-                                <td class="px-4 py-3 text-xs">
-                                <span wire:click.prevent="changeStatus({{$item->id}})" class=" cursor-pointer px-2 py-1 font-semibold rounded-full {{ $item->status? 'bg-green-300 dark:bg-green-700': 'bg-red-300 dark:bg-red-700' }} ">
-                                    {{ $item->status?__('active'):__('inactive') }}
-                                    <x-loader  wire:target="changeStatus({{$item->id}})"/>
-                                </span>
-                                </td>
 
                                 <td class="px-4 py-3 text-xs">{{$item->created_at->diffForHumans()}}</td>
                                 <td class="px-4 py-3 text-xs">{{$item->date_time}}</td>
                                 <td class="px-4 py-3 text-sm flex space-x-4">
+                                    @auth
+                                        @if(auth()->id()==1)
                                     <a href="{{route('admin.question.option.create', $item)}}">Create</a>
                                     <a href="{{route('admin.question.option.edit', $item)}}">Edit</a>
+                                        @endif
+                                    @endauth
                                     @if($item->date_time<=now())
                                         <a href="{{route('admin.question.option.exam', $item)}}"><x-h-o-arrows-expand class="w-5 text-indigo-600 cursor-pointer"/></a>
                                     @endif
@@ -149,8 +146,13 @@ Swal.fire({
         <div  class="inset-0 py-4 rounded-2xl transition duration-150 ease-in-out z-50 absolute" id="modal">
             <div @click.outside="modal= false, editMode = false" class="container mx-auto w-11/12 md:w-2/3 max-w-lg ">
                 <form @submit.prevent="editMode? $wire.editData(): $wire.saveData()" class="relative py-3 px-5 md:px-10 bg-white dark:bg-darkSidebar shadow-md rounded border border-gray-400 dark:border-gray-600 capitalize">
-                    <h1 x-cloak x-show="!editMode" class="text-gray-800 dark:text-gray-200 font-lg font-bold tracking-normal text-center leading-tight mb-4">@lang('add new data')</h1>
-                    <h1 x-cloak x-show="editMode" class="text-gray-800 dark:text-gray-200 font-lg font-bold tracking-normal text-center leading-tight mb-4">@lang('edit this data')</h1>
+                    @auth
+                        @if(auth()->id()==1)
+                            <h1 x-cloak x-show="!editMode" class="text-gray-800 dark:text-gray-200 font-lg font-bold tracking-normal text-center leading-tight mb-4">@lang('add new data')</h1>
+                            <h1 x-cloak x-show="editMode" class="text-gray-800 dark:text-gray-200 font-lg font-bold tracking-normal text-center leading-tight mb-4">@lang('edit this data')</h1>
+                        @endif
+                    @endauth
+
 
                     <label for="name" class="text-gray-800 dark:text-gray-200 text-sm font-bold leading-tight tracking-normal">@lang('name')</label>
                     <input wire:model.lazy="name" class="mb-1 mt-2 text-gray-600 dark:text-gray-300 focus:outline-none focus:border focus:border-indigo-700 font-normal dark:bg-darkBg w-full h-10 flex items-center pl-3 text-sm border-gray-300 dark:border-gray-600 rounded border"/>

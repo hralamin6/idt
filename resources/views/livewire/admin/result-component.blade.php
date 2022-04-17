@@ -64,7 +64,7 @@ Swal.fire({
 >
     <div class="">
         <div class="mx-auto text-center">
-            <h2 class="mx-auto">{{$result->mark}} <span>out of {{$items->count()}}</span></h2>
+            <h2 class="mx-auto">{{@$result->mark}} <span>out of {{@$items->count()}}</span></h2>
         </div>
 
 {{--                    @foreach($item->options as $j => $option)--}}

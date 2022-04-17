@@ -117,6 +117,8 @@
         </x-slot>
     </x-dialog-modal>
 
+    @auth
+        @if(auth()->id()==1)
     <form wire:submit.prevent="import">
             @csrf
             <div
@@ -140,6 +142,8 @@
     <div x-show="isUploading">
         <progress max="100" x-bind:value="progress"></progress>
     </div>
+        @endif
+    @endauth
 
     <div class="lg:m-2 m-1 w-max overflow-visible sm:w-full">
         <div class="text-2x grid grid-cols-18 gap-0.5 lg:gap-1">
