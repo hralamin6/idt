@@ -48,7 +48,13 @@ class QuestionOptionEdit extends Component
     }
     public function mount(Quiz  $quiz)
     {
-
+        foreach ($this->quiz->questions()->get() as $i => $question){
+            $this->ques[$i] =  $question->name;
+            $this->ans[$i] =  $question->answer;
+            foreach ($question->options()->get() as $j => $option){
+                $this->questions[$i][$j] = $option->name;
+            }
+        }
         $this->quiz = $quiz;
     }
     public function delete(Question $question)
@@ -62,13 +68,7 @@ class QuestionOptionEdit extends Component
     }
     public function render()
     {
-        foreach ($this->quiz->questions()->get() as $i => $question){
-            $this->ques[$i] =  $question->name;
-            $this->ans[$i] =  $question->answer;
-            foreach ($question->options()->get() as $j => $option){
-                $this->questions[$i][$j] = $option->name;
-            }
-        }
+
         return view('livewire.admin.question-option-edit');
     }
 
