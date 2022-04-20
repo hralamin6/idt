@@ -22,13 +22,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
     //        User::truncate();
-    //        Quiz::truncate();
-    //        Question::truncate();
-    //        Option::truncate();
+        DB::table('tasks')->insert(['name'=>'ear',]);
+        DB::table('tasks')->insert(['name'=>'eye',]);
+        DB::table('tasks')->insert(['name'=>'mouth',]);
+
         DB::table('users')->insert([
             'name'=>'hralamin',
             'email'=>'hralamin2020@gmail.com',
-//            'type'=> 'admin',
             'email_verified_at' => now(),
             'password'=>Hash::make('0')
         ]);

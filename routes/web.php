@@ -18,6 +18,10 @@ Route::middleware('auth')->group(function () {Route::get('email/verify', Verify:
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/tasks', \App\Http\Livewire\Task\IndexComponent::class)->name('task.index');
+    Route::get('/monthly-task', \App\Http\Livewire\Task\MonthlyTask::class)->name('task.monthly');
+    Route::get('/task-manage', \App\Http\Livewire\Task\TaskManage::class)->name('task.manage');
+
     Route::get('email/verify/{id}/{hash}', EmailVerificationController::class)->middleware('signed')->name('verification.verify');
     Route::post('logout', LogoutController::class)->name('logout');
 });
@@ -46,12 +50,18 @@ Route::name('admin.')->group(function () {
     Route::get('/alpine', \App\Http\Livewire\Admin\AlpineComponent::class)->name('alpine');
 });
 
-Route::middleware('auth')->name('admin.')->group(function () {
-    Route::get('/quiz', \App\Http\Livewire\Admin\QuizComponent::class)->name('quiz');
-    Route::get('/quiz/{quiz}/create', \App\Http\Livewire\Admin\QuestionOption::class)->name('question.option.create');
-    Route::get('/quiz/{quiz}/edit', \App\Http\Livewire\Admin\QuestionOptionEdit::class)->name('question.option.edit');
-    Route::get('/quiz/{quiz}/exam', \App\Http\Livewire\Admin\ExamComponent::class)->name('question.option.exam');
-    Route::get('/quiz/{quiz}/result', \App\Http\Livewire\Admin\ResultComponent::class)->name('question.option.result');
+Route::middleware('auth')->prefix('quiz')->name('admin.')->group(function () {
+    Route::get('/', \App\Http\Livewire\Admin\QuizComponent::class)->name('quiz');
+    Route::get('/{quiz}/create', \App\Http\Livewire\Admin\QuestionOption::class)->name('question.option.create');
+    Route::get('/{quiz}/edit', \App\Http\Livewire\Admin\QuestionOptionEdit::class)->name('question.option.edit');
+    Route::get('/{quiz}/exam', \App\Http\Livewire\Admin\ExamComponent::class)->name('question.option.exam');
+    Route::get('/{quiz}/result', \App\Http\Livewire\Admin\ResultComponent::class)->name('question.option.result');
+});
+
+Route::middleware('auth')->prefix('admin/hadith')->name('admin.hadith.')->group(function () {
+    Route::get('/books', \App\Http\Livewire\Admin\Hadith\HadithBook::class)->name('book');
+    Route::get('/{book:book_key}/chapters', \App\Http\Livewire\Admin\Hadith\HadithChapter::class)->name('chapter');
+    Route::get('/{book:book_key}/{chapter:id}', \App\Http\Livewire\Admin\Hadith\HadithHadith::class)->name('hadith');
 });
 
 

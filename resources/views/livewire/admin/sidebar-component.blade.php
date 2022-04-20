@@ -18,8 +18,12 @@
         <div class="capitalize">
             <x-menu :route="'admin.home'"><x-slot name="icon"><x-h-o-home class="w-5"/></x-slot> Dashboard</x-menu>
             <x-menu :route="'admin.atom'"><x-slot name="icon"><x-h-o-home class="w-5"/></x-slot> Learn Atoms</x-menu>
-            <x-menu :route="'practise.index'"><x-slot name="icon"><x-h-o-home class="w-4"/></x-slot> practise</x-menu>
+            <x-menu :route="'practise.index'"><x-slot name="icon"><x-h-o-home class="w-5"/></x-slot> practise</x-menu>
             <x-menu :route="'admin.quiz'"><x-slot name="icon"><x-h-o-home class="w-5"/></x-slot> Quiz</x-menu>
+            <x-menu :route="'admin.hadith.book'"><x-slot name="icon"><x-h-o-home class="w-5"/></x-slot> Books</x-menu>
+            <x-menu :route="'task.manage'"><x-slot name="icon"><x-h-o-home class="w-5"/></x-slot> Tasks manage</x-menu>
+            <x-menu :route="'task.index'"><x-slot name="icon"><x-h-o-home class="w-5"/></x-slot> Tasks</x-menu>
+            <x-menu :route="'task.monthly'"><x-slot name="icon"><x-h-o-home class="w-5"/></x-slot> Monthly tasks</x-menu>
 
 
 {{--            <div  x-data="{setup: @if(Route::is('admin.*')) true @else false @endif}">--}}
