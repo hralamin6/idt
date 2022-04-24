@@ -19,6 +19,15 @@ class MonthlyTask extends Component
         $this->date = Carbon::createFromFormat('Y-m-d', date('Y-m-d'));
 
     }
+    public function nextDate()
+    {
+        $this->date->addMonth(1);
+    }
+    public function prevDate()
+    {
+        $this->date->addMonth(-1);
+    }
+
     public function render()
     {
         $items = $this->data;

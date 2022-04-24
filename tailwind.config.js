@@ -73,10 +73,10 @@ module.exports = {
         whitelistPatterns: [/-active$/, /-enter$/, /-leave-to$/, /show$/],
     },
     daisyui: {
-        styled: true,
+        // styled: true,
         themes: true,
-        base: true,
-        utils: true,
+        // base: true,
+        // utils: true,
         logs: true,
         rtl: false,
         prefix: "",

@@ -45,6 +45,7 @@
                     <x-field :OB="$orderBy" :OD="$orderDirection" :field="'phase'"> phase </x-field>
                     <x-field :OB="$orderBy" :OD="$orderDirection" :field="'category'"> category </x-field>
                     <x-field :OB="$orderBy" :OD="$orderDirection" :field="'atomic_mass'"> mass </x-field>
+                    <x-field :OB="$orderBy" :OD="$orderDirection" :field="'atomic_mass'"> cpk_hex </x-field>
                 </tr>
                 </thead>
                 <tbody
@@ -65,6 +66,7 @@
                         <td class="p-2">{{$atom->phase}}</td>
                         <td class="p-2 {{$atom->gettype()}} ">{{$atom->category}}</td>
                         <td class="p-2">{{number_format($atom->atomic_mass, 2)}}</td>
+                        <td class="p-2">{{$atom->cpk_hex}}</td>
                     </tr>
                 @endforeach
                 </tbody>

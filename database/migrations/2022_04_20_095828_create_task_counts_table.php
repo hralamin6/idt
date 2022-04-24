@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('task_counts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('task_id')->constrained()->cascadeOnDelete();
+//            $table->foreignId('task_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->date('date');
-            $table->boolean('value');
-            $table->unique(['task_id', 'user_id', 'date']);
+            $table->string('tasks');
+            $table->unique(['user_id', 'date']);
             $table->timestamps();
         });
     }

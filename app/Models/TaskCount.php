@@ -11,6 +11,11 @@ class TaskCount extends Model
     protected $guarded = [];
     protected $casts = [
         'date' => 'date',
+        'tasks' => 'array',
     ];
 
+    public function asdf($id)
+    {
+      return  TaskCount::whereUserId(auth()->id())->whereJsonContains('tasks', ''.$id.'')->count();
+    }
 }

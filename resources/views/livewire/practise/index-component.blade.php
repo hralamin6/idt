@@ -63,14 +63,29 @@
 
     </div>
     <div class="flex flex-col justify-center items-center space-y-2">
-        <a class="btn btn-outline btn-primary btn-sm w-48 col-start-2" href="{{route('practise.symbol.name')}}">symbol to name</a>
-        <a class="btn btn-outline btn-accent btn-sm w-48 col-start-2" href="{{route('practise.symbol.number')}}">symbol to number</a>
-        <a class="btn btn-outline btn-active btn-sm w-48 col-start-2" href="{{route('practise.symbol.mass')}}">symbol to mass</a>
-        <a class="btn btn-outline btn-secondary btn-sm w-48 col-start-2" href="{{route('practise.symbol.group')}}">symbol to group</a>
+{{--        <a class="btn btn-outline btn-primary btn-sm w-48 col-start-2" href="{{route('practise.symbol.name')}}">symbol to name</a>--}}
+{{--        <a class="btn btn-outline btn-accent btn-sm w-48 col-start-2" href="{{route('practise.symbol.number')}}">symbol to number</a>--}}
+{{--        <a class="btn btn-outline btn-active btn-sm w-48 col-start-2" href="{{route('practise.symbol.mass')}}">symbol to mass</a>--}}
+{{--        <a class="btn btn-outline btn-secondary btn-sm w-48 col-start-2" href="{{route('practise.symbol.group')}}">symbol to group</a>--}}
+        @foreach(\Illuminate\Support\Facades\Schema::getColumnListing('atoms') as $i=> $col)
+            @if($col=='name'||$col=='atomic_mass'||$col=='boil'||$col=='category'||$col=='density'||$col=='melt'||$col=='molar_heat'||$col=='number'||$col=='phase'||$col=='xpos'||$col=='ypos'||$col=='shells'||$col=='electron_configuration_semantic'||$col=='electron_affinity'||$col=='electronegativity_pauling')
+        <a class="btn btn-outline btn-primary btn-sm capitalize col-start-2" href="{{route('practise.practise')}}?practise={{$col}}">symbol to {{$col}}</a>
+{{--        <a class="btn btn-outline btn-primary btn-sm w-48 col-start-2" href="{{route('practise.practise')}}?practise=name">symbol to name</a>--}}
+{{--        <a class="btn btn-outline btn-accent btn-sm w-48 col-start-2" href="{{route('practise.practise')}}?practise=number">symbol to number</a>--}}
+{{--        <a class="btn btn-outline btn-active btn-sm w-48 col-start-2" href="{{route('practise.practise')}}?practise=atomic_mass">symbol to mass</a>--}}
+{{--        <a class="btn btn-outline btn-secondary btn-sm w-48 col-start-2" href="{{route('practise.practise')}}?practise=xpos">symbol to group</a>--}}
+{{--        <a class="btn btn-outline btn-secondary btn-sm w-48 col-start-2" href="{{route('practise.practise')}}?practise=ypos">symbol to period</a>--}}
+{{--        <a class="btn btn-outline btn-secondary btn-sm w-48 col-start-2" href="{{route('practise.practise')}}?practise=phase">symbol to phase</a>--}}
+{{--        <a class="btn btn-outline btn-secondary btn-sm w-48 col-start-2" href="{{route('practise.practise')}}?practise=category">symbol to category</a>--}}
+{{--        <a class="btn btn-outline btn-secondary btn-sm w-48 col-start-2" href="{{route('practise.practise')}}?practise=density">symbol to density</a>--}}
+{{--        <a class="btn btn-outline btn-secondary btn-sm w-48 col-start-2" href="{{route('practise.practise')}}?practise=boil">symbol to boiling point</a>--}}
+            @endif
+        @endforeach
+        {{--        <a class="btn btn-outline btn-secondary btn-sm w-48 col-start-2" href="{{route('practise.practise')}}?practise=group">Practise</a>--}}
 
 
-        <a class="btn btn-outline btn-secondary btn-sm w-48 col-start-2" href="{{route('practise.name.symbol')}}">name to symbol</a>
-        <a class="btn btn-outline btn-error btn-sm w-48 col-start-2" href="{{route('practise.number.symbol')}}">number to symbol</a>
-        <a class="btn btn-outline btn-success btn-sm w-48 col-start-2" href="{{route('practise.mass.symbol')}}">mass to symbol</a>
+{{--        <a class="btn btn-outline btn-secondary btn-sm w-48 col-start-2" href="{{route('practise.name.symbol')}}">name to symbol</a>--}}
+{{--        <a class="btn btn-outline btn-error btn-sm w-48 col-start-2" href="{{route('practise.number.symbol')}}">number to symbol</a>--}}
+{{--        <a class="btn btn-outline btn-success btn-sm w-48 col-start-2" href="{{route('practise.mass.symbol')}}">mass to symbol</a>--}}
     </div>
 </div>

@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
 });
 Route::prefix('practise')->name('practise.')->group(function () {
     Route::get('/', \App\Http\Livewire\Practise\IndexComponent::class)->name('index');
+    Route::get('/practise', \App\Http\Livewire\Practise\PractiseComponent::class)->name('practise');
     Route::get('/symbol-name', \App\Http\Livewire\Practise\SymbolName::class)->name('symbol.name');
     Route::get('/symbol-number', \App\Http\Livewire\Practise\SymbolNumber::class)->name('symbol.number');
     Route::get('/symbol-mass', \App\Http\Livewire\Practise\SymbolMass::class)->name('symbol.mass');
