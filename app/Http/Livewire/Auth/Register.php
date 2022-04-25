@@ -41,9 +41,14 @@ class Register extends Component
 
         Auth::login($user, true);
 
-        return redirect()->intended(route('admin.home'));
+        return redirect()->intended(route('home'));
     }
-
+    public function mount()
+    {
+        if (Auth::check()){
+            return redirect()->route('home');
+        }
+    }
     public function render()
     {
         return view('livewire.auth.register')->extends('layouts.auth');

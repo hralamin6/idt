@@ -8,7 +8,7 @@ use Livewire\Component;
 class IndexComponent extends Component
 {
     use LivewireAlert;
-    public $is_single_page=0,$is_mcq=0, $q_range="1-25", $q_number=10, $q_time=30, $is_minus=0;
+    public $is_single_page=0,$is_mcq=1, $q_range="1-25", $q_number=10, $q_time=30, $is_minus=0;
 
     public function mount()
     {
@@ -33,6 +33,7 @@ class IndexComponent extends Component
                 $this->alert('error', __('Question number must be less than range'));
             }
         }
+        $this->startPractise();
     }
      public function startPractise()
     {

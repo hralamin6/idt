@@ -3,22 +3,33 @@
 namespace App\Http\Livewire\Practise;
 
 use App\Models\Atom;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
-class SymbolName extends Component
+class SymbolTo extends Component
 {
     use LivewireAlert;
     public $ans=[];
-    public $item_per_page = 10, $time_per_question = 30, $same_items, $options, $items, $submitted=false, $true_ans, $range, $is_single_page=0, $is_mcq=0, $date_time, $q_start=1, $q_end=25, $is_minus=0;
-
+    public $item_per_page = 10, $time_per_question = 30, $same_items, $practise, $options, $items, $submitted=false, $true_ans, $range, $is_single_page=0, $is_mcq=0, $date_time, $q_start=1, $q_end=25, $is_minus=0;
+    protected $queryString = [
+        'practise'
+    ];
     public function getDataProperty()
     {
         return Atom::where('number', '>=', $this->q_start)->where('number', '<=', $this->q_end)->inRandomOrder()->limit($this->item_per_page)->get();
     }
 
-    public function mount()
+    public function mount(Request $request)
     {
+        $columns = Schema::getColumnListing('atoms');
+        if ($request->practise && in_array($this->practise, $columns)){
+            $this->practise = $request->practise;
+        }else{
+            $this->practise = 'name';
+        }
+//        dd($this->practise);
         if (session()->has('q_range')){
             $r = session()->get('q_range');
             $parts = explode('-', $r);
@@ -47,14 +58,16 @@ class SymbolName extends Component
         foreach ($this->same_items as $i=> $question){
             if (isset($this->ans[$i])){
                 if ($this->is_mcq){
-                    if (strtolower($question->name) === strtolower($this->ans[$i])){
+                    if (strtolower($question[$this->practise]) === strtolower($this->ans[$i])){
                         $this->true_ans++;
                     }else{
                         $this->is_minus? $this->true_ans--:'';
                     }
                 }else{
-                    $str1 = str_split(strtolower($question->name));
-                    $str2 = str_split(strtolower($this->ans[$i]));
+                    $col = is_numeric($question[$this->practise])?strval(number_format($question[$this->practise])):strtolower($question[$this->practise]);
+                    $ans = is_numeric($this->ans[$i])?strval(number_format($this->ans[$i])):strtolower($this->ans[$i]);
+                    $str1 = str_split(strtolower($col));
+                    $str2 = str_split(strtolower($ans));
                     $vowel = str_split('aeiouyh');
                     $diff1 = array_diff($str1, $str2);
                     $diff2 = array_diff($diff1, $vowel);
@@ -73,6 +86,6 @@ class SymbolName extends Component
     }
     public function render()
     {
-        return view('livewire.practise.symbol-name');
+        return view('livewire.practise.symbol-to');
     }
 }

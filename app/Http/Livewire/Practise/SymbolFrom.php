@@ -3,22 +3,34 @@
 namespace App\Http\Livewire\Practise;
 
 use App\Models\Atom;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
-class NameSymbol extends Component
+class SymbolFrom extends Component
 {
     use LivewireAlert;
     public $ans=[];
-    public $item_per_page = 10, $time_per_question = 30, $same_items, $options, $items, $submitted=false, $true_ans, $range, $is_single_page=0, $is_mcq=0, $date_time, $q_start=1, $q_end=25, $is_minus=0;
+    public $item_per_page = 10, $time_per_question = 30, $same_items, $options, $practise, $items, $submitted=false, $true_ans, $range, $is_single_page=0, $is_mcq=0, $date_time, $q_start=1, $q_end=25, $is_minus=0;
+    protected $queryString = [
+        'practise'
+    ];
 
     public function getDataProperty()
     {
         return Atom::where('number', '>=', $this->q_start)->where('number', '<=', $this->q_end)->inRandomOrder()->limit($this->item_per_page)->get();
     }
 
-    public function mount()
+    public function mount(Request $request)
     {
+        $columns = Schema::getColumnListing('atoms');
+        if ($request->practise && in_array($this->practise, $columns)){
+            $this->practise = $request->practise;
+        }else{
+            $this->practise = 'name';
+        }
+
         if (session()->has('q_range')){
             $r = session()->get('q_range');
             $parts = explode('-', $r);
@@ -29,9 +41,9 @@ class NameSymbol extends Component
         if (session()->has('q_number')){
             if (session()->get('q_number')>$this->range){
                 $this->item_per_page = 20;
-        }else{
-            $this->item_per_page = session()->get('q_number');
-        }
+            }else{
+                $this->item_per_page = session()->get('q_number');
+            }
         }
         session()->has('is_single_page')? $this->is_single_page = session()->get('is_single_page'):'';
         session()->has('q_time')? $this->time_per_question = session()->get('q_time'):'';
@@ -61,6 +73,6 @@ class NameSymbol extends Component
 
     public function render()
     {
-        return view('livewire.practise.name-symbol');
+        return view('livewire.practise.symbol-from');
     }
 }

@@ -22,6 +22,12 @@ class Login extends Component
         'password' => ['required'],
     ];
 
+    public function mount()
+    {
+        if (Auth::check()){
+            return redirect()->route('home');
+        }
+    }
     public function authenticate()
     {
         $this->validate();
@@ -32,11 +38,12 @@ class Login extends Component
             return;
         }
 
-        return redirect()->intended(route('admin.home'));
+        return redirect()->intended(route('home'));
     }
 
     public function render()
     {
+
         return view('livewire.auth.login')->extends('layouts.auth');
     }
 }

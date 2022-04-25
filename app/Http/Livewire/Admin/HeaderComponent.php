@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class HeaderComponent extends Component
@@ -14,6 +15,11 @@ class HeaderComponent extends Component
 //        dd($this->is);
     }
 
+    public function logout()
+    {
+        session()->flush();
+            return redirect()->route('home');
+    }
     public function render()
     {
         return view('livewire.admin.header-component');

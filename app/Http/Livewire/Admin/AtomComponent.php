@@ -41,7 +41,7 @@ class AtomComponent extends Component
 
     public function getDataProperty()
     {
-        return Atom::where($this->searchBy, 'like', '%'.$this->search.'%')->orderBy($this->orderBy, $this->orderDirection)->paginate($this->itemPerPage, ['category', 'id', 'name', 'number', 'symbol', 'atomic_mass', 'xpos', 'ypos', 'phase'])->withQueryString();
+        return Atom::where($this->searchBy, 'like', '%'.$this->search.'%')->orderBy($this->orderBy, $this->orderDirection)->paginate($this->itemPerPage, ['name', 'mass', 'boiling_point', 'category', 'density', 'discovered_by', 'melting_point', 'molar_heat', 'number', 'period', 'phase', 'symbol', 'group', 'shells', 'electron_configuration', 'electron_affinity'])->withQueryString();
     }
 
     public function updating($p, $v)

@@ -2,9 +2,12 @@
     <div class="flex justify-between gap-6 p-4 relative inline-block">
         <div class="flex justify-start space-x-4 md:space-x-9 text-gray-500 dark:text-gray-200 text-sm z-0" :class="{'hidden': search}">
             <button @click="nav= !nav" x-on:click.stop><x-h-o-menu class="w-5 md:hidden"/></button>
-            <a href="{{route('admin.home')}}" class="hidden md:block capitalize">home</a>
-{{--            <a href="{{route('admin.home')}}" class="hidden md:block capitalize">contact</a>--}}
-
+        </div>
+        <div class="flex justify-between     gap-2">
+            <x-m :route="'home'"> home</x-m>
+            <x-m :route="'atom'"> Learn</x-m>
+            <x-m :route="'practise.index'"> practise</x-m>
+{{--            <x-m :route="'admin.quiz'"> Quiz</x-m>--}}
         </div>
 {{--        <div class="w-full hidden md:block">--}}
 {{--            <div class="flex justify-center space-x-2 text-gray-500 dark:text-gray-200 text-sm mt-0">--}}
@@ -24,15 +27,13 @@
         </div>
 
         <div class="flex justify-end space-x-8 md:space-x-12 text-gray-600 dark:text-gray-200 text-sm font-bold z-0" :class="{'hidden': search}">
-{{--            <a class="md:hidden cursor-pointer" @click.prevent="search=!search"><x-h-o-search class="w-5"/></a>--}}
             <a class="cursor-pointer" @click="dark=!dark"><x-h-o-sun x-show="dark" class="w-5"/><x-h-o-moon x-show="!dark" class="w-5"/></a>
-
-{{--            <a href="" class="relative cursor-pointer" ><x-h-o-chat class="w-5"/>--}}
-{{--                <span class="absolute top-0 right-0 inline-flex items-center justify-center p-0.5 text-xs text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">12</span>--}}
-{{--            </a>--}}
-{{--            <a class="cursor-pointer"><x-h-o-bell class="w-5"/></a>--}}
+            @guest
             <a href="{{route('login')}}" class="cursor-pointer"><x-h-o-login class="w-5"/></a>
-
+            @endguest
+            @auth
+                <a wire:click.prevent="logout" class="cursor-pointer"><x-h-o-logout class="w-5"/></a>
+            @endauth
         </div>
     </div>
 </header>

@@ -11,7 +11,7 @@ class Verify extends Component
     public function resend()
     {
         if (Auth::user()->hasVerifiedEmail()) {
-            redirect(route('admin.home'));
+            redirect(route('home'));
         }
 
         Auth::user()->sendEmailVerificationNotification();

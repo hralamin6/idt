@@ -16,31 +16,23 @@ return new class extends Migration
         Schema::create('atoms', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('appearance')->nullable();
-            $table->double('atomic_mass')->nullable();
-            $table->double('boil')->nullable();
+            $table->double('mass')->nullable();
+            $table->double('boiling_point')->nullable();
             $table->string('category')->nullable();
             $table->double('density')->nullable();
             $table->string('discovered_by')->nullable();
-            $table->double('melt')->nullable();
+            $table->double('melting_point')->nullable();
             $table->double('molar_heat')->nullable();
-            $table->string('named_by')->nullable();
             $table->integer('number')->nullable();
             $table->integer('period')->nullable();
             $table->string('phase')->nullable();
             $table->string('source')->nullable();
-            $table->string('spectral_img')->nullable();
             $table->text('summary')->nullable();
             $table->string('symbol')->nullable();
-            $table->integer('xpos')->nullable();
-            $table->integer('ypos')->nullable();
+            $table->integer('group')->nullable();
             $table->string('shells')->nullable();
             $table->string('electron_configuration')->nullable();
-            $table->string('electron_configuration_semantic')->nullable();
             $table->double('electron_affinity')->nullable();
-            $table->double('electronegativity_pauling')->nullable();
-            $table->string('ionization_energies')->nullable();
-            $table->string('cpk_hex')->nullable();
             $table->timestamps();
         });
     }
@@ -55,7 +47,6 @@ return new class extends Migration
         Schema::dropIfExists('atoms');
     }
 };
-
 
 
 

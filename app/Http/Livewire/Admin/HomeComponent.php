@@ -35,7 +35,7 @@ class HomeComponent extends Component
     }
     public function render()
     {
-        $atoms = Atom::all('id', 'name', 'number', 'symbol', 'atomic_mass', 'category');
+        $atoms = Atom::all('id', 'name', 'number', 'symbol', 'mass', 'category');
         return view('livewire.admin.home-component', compact('atoms'));
     }
 }

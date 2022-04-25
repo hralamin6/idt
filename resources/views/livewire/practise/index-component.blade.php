@@ -1,8 +1,8 @@
 <div>
-    <div class="m-2 md:w-1/2">
+    <div class="m-2 md:w-1/2  items-center m-auto text-sm dark:text-white">
         <div class="grid grid-cols-2  justify-between gap-2  capitalize my-3">
             <label for="is_single_page">question pattern</label>
-            <select wire:model.lazy="is_single_page" class="select select-bordered  max-w-xs">
+            <select wire:model.lazy="is_single_page" class="select border border-indigo-400 dark:bg-gray-600 dark:bg-gray-600 text-xs select-sm text-xs select-sm max-w-xs">
                 <option disabled selected>Q. pattern</option>
                 <option value="1">In a single page</option>
                 <option value="0">One Q. per page</option>
@@ -10,7 +10,7 @@
         </div>
         <div class="grid grid-cols-2  justify-start gap-2  capitalize my-3">
             <label for="is_single_page">question range</label>
-            <select wire:model.lazy="q_range" class="select select-bordered  max-w-xs">
+            <select wire:model.lazy="q_range" class="select border border-indigo-400 dark:bg-gray-600 text-xs select-sm  max-w-xs">
                 <option value="1-25">1-25</option>
                 <option value="26-50">26-50</option>
                 <option value="51-75">51-75</option>
@@ -23,7 +23,7 @@
         </div>
         <div class="grid grid-cols-2  justify-start gap-2  capitalize my-3">
             <label for="is_single_page">question number</label>
-            <select wire:model.lazy="q_number" class="select select-bordered  max-w-xs">
+            <select wire:model.lazy="q_number" class="select border border-indigo-400 dark:bg-gray-600 text-xs select-sm  max-w-xs">
                 <option disabled selected>Q. number</option>
                 <option value="10">10</option>
                 <option value="15">15</option>
@@ -34,7 +34,7 @@
         </div>
         <div class="grid grid-cols-2  justify-start gap-2  capitalize my-3">
             <label for="is_single_page">time per question</label>
-            <select wire:model.lazy="q_time" class="select select-bordered  max-w-xs">
+            <select wire:model.lazy="q_time" class="select border border-indigo-400 dark:bg-gray-600 text-xs select-sm  max-w-xs">
                 <option disabled selected>Time per Q.</option>
                 <option value="10">10 sec</option>
                 <option value="15">15 sec</option>
@@ -45,7 +45,7 @@
         </div>
         <div class="grid grid-cols-2  justify-start gap-2  capitalize my-3">
             <label for="is_single_page">result system</label>
-            <select wire:model.lazy="is_minus" class="select select-bordered  max-w-xs">
+            <select wire:model.lazy="is_minus" class="select border border-indigo-400 dark:bg-gray-600 text-xs select-sm  max-w-xs">
                 <option disabled selected>Result system</option>
                 <option value="1">Minus for wrong ans.</option>
                 <option value="0">No Minus for wrong ans.</option>
@@ -53,39 +53,21 @@
         </div>
         <div class="grid grid-cols-2  justify-start gap-2  capitalize my-3">
             <label for="is_single_page">question type</label>
-            <select wire:model.lazy="is_mcq" class="select select-bordered  max-w-xs">
+            <select wire:model.lazy="is_mcq" class="select border border-indigo-400 dark:bg-gray-600 text-xs select-sm  max-w-xs">
                 <option disabled selected>Result system</option>
                 <option value="0">question answer</option>
                 <option value="1">multiple choice question</option>
             </select>
         </div>
-        <button class="btn btn-outline btn-primary btn-sm w-24 col-start-2" wire:target="startPractise" wire:click.prevent="startPractise" wire:loading.class.add="loading">Save</button>
+{{--        <button class="btn btn-outline btn-primary btn-sm text-xs" wire:target="startPractise" wire:click.prevent="startPractise" wire:loading.class.add="loading">Save</button>--}}
 
     </div>
-    <div class="flex flex-col justify-center items-center space-y-2">
-{{--        <a class="btn btn-outline btn-primary btn-sm w-48 col-start-2" href="{{route('practise.symbol.name')}}">symbol to name</a>--}}
-{{--        <a class="btn btn-outline btn-accent btn-sm w-48 col-start-2" href="{{route('practise.symbol.number')}}">symbol to number</a>--}}
-{{--        <a class="btn btn-outline btn-active btn-sm w-48 col-start-2" href="{{route('practise.symbol.mass')}}">symbol to mass</a>--}}
-{{--        <a class="btn btn-outline btn-secondary btn-sm w-48 col-start-2" href="{{route('practise.symbol.group')}}">symbol to group</a>--}}
+    <div class="grid grid-cols-2 justify-between md:grid-cols-2 gap-6">
         @foreach(\Illuminate\Support\Facades\Schema::getColumnListing('atoms') as $i=> $col)
-            @if($col=='name'||$col=='atomic_mass'||$col=='boil'||$col=='category'||$col=='density'||$col=='melt'||$col=='molar_heat'||$col=='number'||$col=='phase'||$col=='xpos'||$col=='ypos'||$col=='shells'||$col=='electron_configuration_semantic'||$col=='electron_affinity'||$col=='electronegativity_pauling')
-        <a class="btn btn-outline btn-primary btn-sm capitalize col-start-2" href="{{route('practise.practise')}}?practise={{$col}}">symbol to {{$col}}</a>
-{{--        <a class="btn btn-outline btn-primary btn-sm w-48 col-start-2" href="{{route('practise.practise')}}?practise=name">symbol to name</a>--}}
-{{--        <a class="btn btn-outline btn-accent btn-sm w-48 col-start-2" href="{{route('practise.practise')}}?practise=number">symbol to number</a>--}}
-{{--        <a class="btn btn-outline btn-active btn-sm w-48 col-start-2" href="{{route('practise.practise')}}?practise=atomic_mass">symbol to mass</a>--}}
-{{--        <a class="btn btn-outline btn-secondary btn-sm w-48 col-start-2" href="{{route('practise.practise')}}?practise=xpos">symbol to group</a>--}}
-{{--        <a class="btn btn-outline btn-secondary btn-sm w-48 col-start-2" href="{{route('practise.practise')}}?practise=ypos">symbol to period</a>--}}
-{{--        <a class="btn btn-outline btn-secondary btn-sm w-48 col-start-2" href="{{route('practise.practise')}}?practise=phase">symbol to phase</a>--}}
-{{--        <a class="btn btn-outline btn-secondary btn-sm w-48 col-start-2" href="{{route('practise.practise')}}?practise=category">symbol to category</a>--}}
-{{--        <a class="btn btn-outline btn-secondary btn-sm w-48 col-start-2" href="{{route('practise.practise')}}?practise=density">symbol to density</a>--}}
-{{--        <a class="btn btn-outline btn-secondary btn-sm w-48 col-start-2" href="{{route('practise.practise')}}?practise=boil">symbol to boiling point</a>--}}
+            @if($col!='summary' && $col!='id')
+        <a class="btn btn-outline btn-primary btn-sm capitalize dark:text-pink-400" href="{{route('practise.symbol.to')}}?practise={{$col}}">symbol to {{$col}}</a>
+        <a class="btn btn-outline btn-secondary btn-sm capitalize dark:text-blue-400" href="{{route('practise.symbol.from')}}?practise={{$col}}">{{$col}} to symbol</a>
             @endif
         @endforeach
-        {{--        <a class="btn btn-outline btn-secondary btn-sm w-48 col-start-2" href="{{route('practise.practise')}}?practise=group">Practise</a>--}}
-
-
-{{--        <a class="btn btn-outline btn-secondary btn-sm w-48 col-start-2" href="{{route('practise.name.symbol')}}">name to symbol</a>--}}
-{{--        <a class="btn btn-outline btn-error btn-sm w-48 col-start-2" href="{{route('practise.number.symbol')}}">number to symbol</a>--}}
-{{--        <a class="btn btn-outline btn-success btn-sm w-48 col-start-2" href="{{route('practise.mass.symbol')}}">mass to symbol</a>--}}
     </div>
 </div>

@@ -8,13 +8,13 @@ class Atom extends Model
     use HasFactory;
     public function options(Atom $atom, $field)
     {
-        if ($field==='number'||$field==='atomic_mass' || $field==='boil'||$field==='density'||$field==='melt'||$field==='id'||$field==='electron_affinity'||$field==='electronegativity_pauling'){
+        if ($field==='number'||$field==='mass' || $field==='boiling_point'||$field==='density'||$field==='melting_point'||$field==='id'||$field==='electron_affinity'){
             $atom = Atom::where('id', '!=', $atom->id)->where('id', '<=', $atom->id+5)->where('id', '>=', $atom->id-5)->inRandomOrder()->limit(3)->get()->merge(Atom::where('id', $atom->id)->get());
-        }elseif ($field==='xpos'||$field==='ypos'||$field==='category'||$field==='period'){
+        }elseif ($field==='group'||$field==='category'||$field==='period'){
             $atom = Atom::where('id', '!=', $atom->id)->where($field, '!=', $atom[$field])->inRandomOrder()->limit(3)->get()->merge(Atom::where('id', $atom->id)->get());
         }elseif ($field==='phase'){
             $atom = Atom::where('id', '!=', $atom->id)->where($field, '!=', $atom[$field])->inRandomOrder()->limit(1)->get()->merge(Atom::where('id', $atom->id)->get());
-        }elseif ($field==='name'){
+        }elseif ($field==='name' || $field==='symbol'){
             $f = substr($atom->symbol, 0, 1);
             $atom = Atom::where('id', '!=', $atom->id)->where($field, 'like', $f.'%')->inRandomOrder()->limit(3)->get()->merge(Atom::where('id', $atom->id)->get());
         }else{
@@ -27,7 +27,7 @@ class Atom extends Model
         if ($this->category=='alkaline earth metal'){
             return 'text-green-400';
         }elseif($this->category=='diatomic nonmetal'){
-            return 'text-green-500';
+            return 'text-accent';
         }elseif($this->category=='alkali metal'){
             return 'text-yellow-500';
         }elseif($this->category=='noble gas'){
@@ -48,16 +48,4 @@ class Atom extends Model
             return 'text-gray-500';
         }
     }
-
-    public function int_options(Atom $atom, $field)
-    {
-        $atom = Atom::where('id', '!=', $atom->id)->where('id', '<=', $atom->id+5)->where('id', '>=', $atom->id-5)->inRandomOrder()->limit(3)->get()->merge(Atom::where('id', $atom->id)->get());
-        return $atom->shuffle();
-    }
-    public function pos_options(Atom $atom, $field)
-    {
-        $atom = Atom::where('id', '!=', $atom->id)->where($field, '!=', $atom->xpos)->inRandomOrder()->limit(3)->get()->merge(Atom::where('id', $atom->id)->get());
-        return $atom->shuffle();
-    }
-
 }

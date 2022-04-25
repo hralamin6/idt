@@ -75,19 +75,19 @@
             @foreach($items as $i => $item)
                 <div @if(!$is_single_page) x-cloak x-show="step=={{$i+1}}"
                      @endif class=" @if(!$is_mcq) md:flex md:gap-2 justify-between @endif border border-2 rounded-lg border-purple-400 p-3 my-2">
-                    <legend class="text-lg font-medium my-1"><span>({{$i+1}})</span> What is the atomic number of <span
-                            class="text-primary">{{$item->symbol}}?</span></legend>
+                    <legend class="text-lg font-medium my-1"><span>({{$i+1}})</span> What is the symbol of <span
+                            class="text-primary">{{$item[$practise]}}?</span></legend>
                     @if(!$is_mcq)
-                        <input type="number" placeholder="Atomic number, e.g: 02" x-model="ans[{{$i}}]"
+                        <input type="text" placeholder="Enter symbol, e.g: Ca" x-model="ans[{{$i}}]"
                                class="input input-bordered input-info focus:shadow-none focus:outline-none input-sm max-w-xs">
                     @else
                         <ul class="grid grid-cols-2 gap-4">
-                            @foreach($item->int_options($item, 'number') as $j => $option)
+                            @foreach($item->options($item, 'symbol') as $j => $option)
                                 <li>
                                     <label class="flex items-center text-sm">
-                                        <input x-model="ans[{{$i}}]" value="{{$option->number}}" type="radio"
+                                        <input x-model="ans[{{$i}}]" value="{{$option->symbol}}" type="radio"
                                                class="w-4 h-4 border border-gray-300 rounded-md"/>
-                                        <span class="ml-3 text-md font-medium">{{$option->number}}</span>
+                                        <span class="ml-3 text-md font-medium">{{$option->symbol}}</span>
                                     </label>
                                 </li>
                             @endforeach
@@ -107,7 +107,7 @@
                     </button>
                     <button x-cloak x-show="step==itemPerPage"
                             class="btn btn-sm btn-outline btn-secondary col-start-3 justify-self-end"
-                            wire:loading.class.add="loading" @click="$wire.set('ans', ans), $wire.submit(), step=0">
+                            wire:loading.class.add="loading" @click="$wire.set('ans', ans), $wire.submit()">
                         submit
                     </button>
                     <button x-cloak x-show="step<itemPerPage" @click="step<itemPerPage?step++:''"
@@ -121,22 +121,22 @@
         <div class="py-8 flex flex-col justify-start md:w-1/2 m-auto capitalize">
             @foreach($items as $i => $item)
                 <div
-                    class="border border-2 rounded-lg border-purple-400 p-3 my-2 {{strtolower($ans[$i])==strtolower($item->number)?'bg-green-100':'bg-red-100'}} ">
-                    <legend class="text-lg font-medium my-1"><span>({{$i+1}})</span> What is the atomic number of <span
-                            class="text-primary">{{$item->symbol}}?</span></legend>
+                    class="border border-2 rounded-lg border-purple-400 p-3 my-2 {{strtolower($ans[$i])==strtolower($item->symbol)?'bg-green-100':'bg-red-100'}} ">
+                    <legend class="text-lg font-medium my-1"><span>({{$i+1}})</span> What is the symbol of <span
+                            class="text-primary">{{$item[$practise]}}?</span></legend>
                     <ul class="grid grid-cols-2 gap-4">
                         <li>
                             <label class="flex items-center text-sm">
                                     <span class="ml-3 text-md font-medium">Your ans:
                                         <span
-                                            class="{{strtolower($ans[$i])==strtolower($item->number)?'text-blue-600':'text-red-600'}}">{{$ans[$i]?$ans[$i]:'no answer'}}</span>
+                                            class="{{strtolower($ans[$i])==strtolower($item->symbol)?'text-blue-600':'text-red-600'}}">{{$ans[$i]?$ans[$i]:'no answer'}}</span>
                                     </span>
                             </label>
                         </li>
                         <li>
                             <label class="flex items-center text-sm">
                                     <span class="ml-3 text-md font-medium">Correct ans:
-                                        <span class="text-green-600">{{$item->number}}</span>
+                                        <span class="text-green-600">{{$item->symbol}}</span>
                                     </span>
                             </label>
                         </li>
@@ -144,7 +144,7 @@
                 </div>
             @endforeach
             <center>
-                <a href="{{route('practise.symbol.number')}}" class="btn btn-outline btn-primary btn-xs btn-block w-48">Try
+                <a href="{{route('practise.symbol.from')}}" class="btn btn-outline btn-primary btn-xs btn-block w-48">Try
                     again</a>
             </center>
         </div>

@@ -75,19 +75,19 @@
             @foreach($items as $i => $item)
                 <div @if(!$is_single_page) x-cloak x-show="step=={{$i+1}}"
                      @endif class=" @if(!$is_mcq) md:flex md:gap-2 justify-between @endif border border-2 rounded-lg border-purple-400 p-3 my-2">
-                    <legend class="text-lg font-medium my-1"><span>({{$i+1}})</span> What is the name of <span
+                    <legend class="text-lg font-medium my-1"><span>({{$i+1}})</span> What is the {{$practise}} of <span
                             class="text-primary">{{$item->symbol}}?</span></legend>
                     @if(!$is_mcq)
-                        <input type="text" placeholder="Enter name, e.g: Carbon" x-model="ans[{{$i}}]"
+                        <input type="text" placeholder="" x-model="ans[{{$i}}]"
                                class="input input-bordered input-info focus:shadow-none focus:outline-none input-sm max-w-xs">
                     @else
                         <ul class="grid grid-cols-2 gap-4">
-                            @foreach($item->options($item, 'name') as $j => $option)
+                            @foreach($item->options($item, $practise) as $j => $option)
                                 <li>
                                     <label class="flex items-center text-sm">
-                                        <input x-model="ans[{{$i}}]" value="{{$option->name}}" type="radio"
+                                        <input x-model="ans[{{$i}}]" value="{{$option[$practise]}}" type="radio"
                                                class="w-4 h-4 border border-gray-300 rounded-md"/>
-                                        <span class="ml-3 text-md font-medium">{{$option->name}}</span>
+                                        <span class="ml-3 text-md font-medium">{{is_numeric($option[$practise])?number_format($option[$practise], 2):$option[$practise]}}</span>
                                     </label>
                                 </li>
                             @endforeach
@@ -107,7 +107,7 @@
                     </button>
                     <button x-cloak x-show="step==itemPerPage"
                             class="btn btn-sm btn-outline btn-secondary col-start-3 justify-self-end"
-                            wire:loading.class.add="loading" @click="$wire.set('ans', ans), $wire.submit(), step=0">
+                            wire:loading.class.add="loading" @click="$wire.set('ans', ans), $wire.submit()">
                         submit
                     </button>
                     <button x-cloak x-show="step<itemPerPage" @click="step<itemPerPage?step++:''"
@@ -121,44 +121,55 @@
         <div class="py-8 flex flex-col justify-start md:w-1/2 m-auto capitalize">
             @foreach($items as $i => $item)
                 @php
-                    $str1 = str_split(strtolower($item->name));
-                    $str2 = str_split(strtolower($this->ans[$i]));
-                    $vowel = str_split('aeiouyh');
-                    $diff1 = array_diff($str1, $str2);
-                    $diff2 = array_diff($diff1, $vowel);
-                    if (strlen(implode($diff2))==0 && strlen($this->ans[$i])<13){
-                        $is_true = true;
-                    }else{
-                        $is_true = false;
-                    }
+                    if ($is_mcq){
+                                $col = strtolower($item[$practise]);
+                            $a = strtolower($ans[$i]);
+
+                        if (strtolower($item[$practise]) === strtolower($ans[$i])){
+                                        $is_true = true;
+                        }else{
+            $is_true = false;
+                        }
+                        }else{
+                        $col = is_numeric($item[$practise])?strval(number_format($item[$practise])):strtolower($item[$practise]);
+        $a = is_numeric($ans[$i])?strval(number_format($ans[$i])):strtolower($ans[$i]);
+        $str1 = str_split(strtolower($col));
+        $str2 = str_split(strtolower($a));
+        $vowel = str_split('aeiouyh');
+        $diff1 = array_diff($str1, $str2);
+        $diff2 = array_diff($diff1, $vowel);
+        if (strlen(implode($diff2))==0 && strlen($this->ans[$i])<13){
+            $is_true = true;
+        }else{
+            $is_true = false;
+        }
+        }
                 @endphp
                 <div
                     class="border border-2 rounded-lg border-purple-400 p-3 my-2 {{$is_true?'bg-green-100':'bg-red-100'}} ">
-                    <legend class="text-lg font-medium my-1"><span>({{$i+1}})</span> What is the name of <span
+                    <legend class="text-lg font-medium my-1"><span>({{$i+1}})</span> What is the {{$practise}} of <span
                             class="text-primary">{{$item->symbol}}?</span></legend>
                     <ul class="grid grid-cols-2 gap-4">
                         <li>
                             <label class="flex items-center text-sm">
+                                {{$col}} = {{$a}}
                                     <span class="ml-3 text-md font-medium">Your ans:
                                         <span
-                                            class="{{strtolower($ans[$i])==strtolower($item->name)?'text-blue-600':'text-red-600'}}">{{$ans[$i]?$ans[$i]:'no answer'}}</span>
+                                            class="{{$col === $a ?'text-blue-600':'text-red-600'}}">{{$ans[$i]?is_numeric($ans[$i])?number_format($ans[$i], 2):$ans[$i]:'no answer'}}</span>
                                     </span>
                             </label>
                         </li>
                         <li>
                             <label class="flex items-center text-sm">
                                     <span class="ml-3 text-md font-medium">Correct ans:
-                                        <span class="text-green-600">{{$item->name}}</span>
+                                        <span class="text-green-600">{{is_numeric($item[$practise])?number_format($item[$practise], 2):$item[$practise]}}</span>
                                     </span>
                             </label>
                         </li>
                     </ul>
                 </div>
             @endforeach
-            <center>
-                <a href="{{route('practise.symbol.name')}}" class="btn btn-outline btn-primary btn-xs btn-block w-48">Try
-                    again</a>
-            </center>
+            <center><a href="{{route('practise.symbol.to')}}?practise={{$practise}}" class="btn btn-outline btn-primary btn-xs btn-block w-48">Try again</a></center>
         </div>
     @endif
 </div>
