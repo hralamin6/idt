@@ -38,7 +38,12 @@ class TaskManage extends Component
     }
     public function editData()
     {
-        Validator::make($this->state, ['name' => ['required', Rule::unique('tasks', 'name')->ignore($this->task['id'])]])->validate();
+        Validator::make($this->state, [
+            'name' => ['required', Rule::unique('tasks', 'name')->ignore($this->task['id'])],
+            'name_bn' => ['required', Rule::unique('tasks', 'name_bn')->ignore($this->task['id'])],
+            'description' => ['nullable'],
+            'description_bn' => ['nullable'],
+            ])->validate();
         $this->task->update($this->state);
         $this->emit('dataAdded', ['dataId' => 'item-id-'.$this->task->id]);
         $this->alert('success', __('Data updated successfully'));
@@ -46,7 +51,13 @@ class TaskManage extends Component
     }
     public function saveData()
     {
-        Validator::make($this->state, ['name' => ['required', Rule::unique('tasks', 'name')]])->validate();
+        Validator::make($this->state, [
+            'name' => ['required', Rule::unique('tasks', 'name')],
+            'name_bn' => ['required', Rule::unique('tasks', 'name_bn')],
+            'description' => ['nullable'],
+            'description_bn' => ['nullable'],
+
+        ])->validate();
         $data = Task::create($this->state);
         $this->goToPage($this->getDataProperty()->lastPage());
 //        $this->emit('dataAdded', ['dataId' => 'item-id-'.$data->id]);

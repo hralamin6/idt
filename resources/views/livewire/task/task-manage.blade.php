@@ -1,3 +1,13 @@
+@push('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css"  />
+@endpush
+@push('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js" ></script>
+@endpush
+@section('title', __('Task manage'))
+@section('description', __('this page for task management system only for admin'))
+{{--@section('image', $post->image)--}}
+{{--@section('url', config('app.url').'post/'.$post->slug)--}}
 <div class=" rounded-xl mt-4" x-data="{openTable: $persist(true), modal: false, editMode: false}"
      x-init="
      $wire.on('openModal', (e) => {modal = true})
@@ -94,6 +104,7 @@ Swal.fire({
                             </th>
                             <th class="px-4 py-3">@lang('sl')</th>
                             <th class="px-4 py-3">@lang('name')</th>
+                            <th class="px-4 py-3">@lang('name bn')</th>
                             <th class="px-4 py-3">@lang('status')</th>
                             <th class="px-4 py-3">@lang('action')</th>
                         </tr>
@@ -108,6 +119,7 @@ Swal.fire({
                                 </td>
                                 <td class="px-4 py-3">{{$items->firstItem() + $i}}</td>
                                 <td class="px-4 py-3 text-sm">{!! $item->name !!} </td>
+                                <td class="px-4 py-3 text-sm">{!! $item->name_bn !!} </td>
                                 <td class="px-4 py-3 text-xs">
                                 <span wire:click.prevent="changeStatus({{$item->id}})" class=" cursor-pointer px-2 py-1 font-semibold rounded-full {{ $item->status? 'bg-green-300 dark:bg-green-700': 'bg-red-300 dark:bg-red-700' }} ">
                                     {{ $item->status?__('active'):__('inactive') }}
@@ -141,9 +153,30 @@ Swal.fire({
                     <h1 x-cloak x-show="editMode" class="text-gray-800 dark:text-gray-200 font-lg font-bold tracking-normal text-center leading-tight mb-4">@lang('edit this data')</h1>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
                         <div>
-                            <label for="name" class="text-gray-800 dark:text-gray-200 text-sm font-bold leading-tight tracking-normal">@lang('name bn')</label>
+                            <label for="name" class="text-gray-800 dark:text-gray-200 text-sm font-bold leading-tight tracking-normal">@lang('name')</label>
                             <input wire:model.lazy="state.name" class="input input-bordered input-info w-full input-sm max-w-xs"/>
                             @error('name')<p class="text-sm text-red-600">{{ $message }}</p>@enderror
+                        </div>
+                        <div>
+                            <label for="name_bn" class="text-gray-800 dark:text-gray-200 text-sm font-bold leading-tight tracking-normal">@lang('name bn')</label>
+                            <input wire:model.lazy="state.name_bn" class="input input-bordered input-info w-full input-sm max-w-xs"/>
+                            @error('name_bn')<p class="text-sm text-red-600">{{ $message }}</p>@enderror
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1">
+                        <div>
+                            <label for="description" class="text-gray-800 dark:text-gray-200 text-sm font-bold leading-tight tracking-normal">@lang('description')</label>
+                            <span wire:ignore>
+                                <trix-editor class="formatted-content" x-data x-on:trix-change="$dispatch('input', event.target.value)" wire:model.debounce.1000ms="state.description" wire:key="description"></trix-editor>
+                            </span>
+                            @error('description') <span class="text-danger text-bold"> {{$message}}</span>@enderror
+                        </div>
+                        <div>
+                            <label for="description_bn" class="text-gray-800 dark:text-gray-200 text-sm font-bold leading-tight tracking-normal">@lang('description bn')</label>
+                            <span wire:ignore>
+                                <trix-editor class="formatted-content" x-data x-on:trix-change="$dispatch('input', event.target.value)" wire:model.debounce.1000ms="state.description_bn" wire:key="description_bn"></trix-editor>
+                            </span>
+                            @error('description_bn') <span class="text-danger text-bold"> {{$message}}</span>@enderror
                         </div>
                     </div>
                     <div class="flex items-center justify-between w-full mt-4">

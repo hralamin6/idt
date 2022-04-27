@@ -21,17 +21,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-    //        User::truncate();
-        DB::table('tasks')->insert(['name'=>'ear',]);
-        DB::table('tasks')->insert(['name'=>'eye',]);
-        DB::table('tasks')->insert(['name'=>'mouth',]);
-
         DB::table('users')->insert([
             'name'=>'hralamin',
+            'type'=>'admin',
             'email'=>'hralamin2020@gmail.com',
             'email_verified_at' => now(),
-            'password'=>Hash::make('0')
+            'password'=>Hash::make('Qqqqqqqq1@')
         ]);
+        \App\Models\Setup::factory(1)->create();
+        \App\Models\Task::factory(10)->create();
 
         // \App\Models\User::factory(10)->create();
 //        \App\Models\Quiz::factory(10)->create()->each(function ($quiz) {
