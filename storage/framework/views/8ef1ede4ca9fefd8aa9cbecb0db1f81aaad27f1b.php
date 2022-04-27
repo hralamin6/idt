@@ -222,30 +222,26 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                     </div>
                     <div class="grid grid-cols-1">
-                        <div>
+                        <div class="flex flex-col">
                             <label for="description" class="text-gray-800 dark:text-gray-200 text-sm font-bold leading-tight tracking-normal"><?php echo app('translator')->get('description'); ?></label>
-                            <span wire:ignore>
-                                <trix-editor class="formatted-content" x-data x-on:trix-change="$dispatch('input', event.target.value)" wire:model.debounce.1000ms="state.description" wire:key="description"></trix-editor>
-                            </span>
+                            <textarea  wire:model.lazy="state.description" class="textarea textarea-bordered" placeholder=""></textarea>
                             <?php $__errorArgs = ['description'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> <span class="text-danger text-bold"> <?php echo e($message); ?></span><?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?><p class="text-sm text-red-600"><?php echo e($message); ?></p><?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                         </div>
-                        <div>
+                        <div class="flex flex-col">
                             <label for="description_bn" class="text-gray-800 dark:text-gray-200 text-sm font-bold leading-tight tracking-normal"><?php echo app('translator')->get('description bn'); ?></label>
-                            <span wire:ignore>
-                                <trix-editor class="formatted-content" x-data x-on:trix-change="$dispatch('input', event.target.value)" wire:model.debounce.1000ms="state.description_bn" wire:key="description_bn"></trix-editor>
-                            </span>
+                            <textarea  wire:model.lazy="state.description_bn" class="textarea textarea-bordered" placeholder=""></textarea>
                             <?php $__errorArgs = ['description_bn'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> <span class="text-danger text-bold"> <?php echo e($message); ?></span><?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?><p class="text-sm text-red-600"><?php echo e($message); ?></p><?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>

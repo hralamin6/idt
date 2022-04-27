@@ -6,7 +6,7 @@
             <div class="">
                 <center>
                     <img class="h-10" src="<?php echo e(\App\Models\Setup::first()->logo); ?>"  alt="logo">
-                    <span class="bg-transparent text-secondary p-2 rounded-md shadow-lg">ModestLife</span>
+
                 </center>
             </div>
         </a>

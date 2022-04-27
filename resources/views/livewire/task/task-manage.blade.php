@@ -164,19 +164,15 @@ Swal.fire({
                         </div>
                     </div>
                     <div class="grid grid-cols-1">
-                        <div>
+                        <div class="flex flex-col">
                             <label for="description" class="text-gray-800 dark:text-gray-200 text-sm font-bold leading-tight tracking-normal">@lang('description')</label>
-                            <span wire:ignore>
-                                <trix-editor class="formatted-content" x-data x-on:trix-change="$dispatch('input', event.target.value)" wire:model.debounce.1000ms="state.description" wire:key="description"></trix-editor>
-                            </span>
-                            @error('description') <span class="text-danger text-bold"> {{$message}}</span>@enderror
+                            <textarea  wire:model.lazy="state.description" class="textarea textarea-bordered" placeholder=""></textarea>
+                            @error('description')<p class="text-sm text-red-600">{{ $message }}</p>@enderror
                         </div>
-                        <div>
+                        <div class="flex flex-col">
                             <label for="description_bn" class="text-gray-800 dark:text-gray-200 text-sm font-bold leading-tight tracking-normal">@lang('description bn')</label>
-                            <span wire:ignore>
-                                <trix-editor class="formatted-content" x-data x-on:trix-change="$dispatch('input', event.target.value)" wire:model.debounce.1000ms="state.description_bn" wire:key="description_bn"></trix-editor>
-                            </span>
-                            @error('description_bn') <span class="text-danger text-bold"> {{$message}}</span>@enderror
+                            <textarea  wire:model.lazy="state.description_bn" class="textarea textarea-bordered" placeholder=""></textarea>
+                            @error('description_bn')<p class="text-sm text-red-600">{{ $message }}</p>@enderror
                         </div>
                     </div>
                     <div class="flex items-center justify-between w-full mt-4">

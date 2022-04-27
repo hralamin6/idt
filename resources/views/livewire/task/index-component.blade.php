@@ -128,7 +128,7 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
             @endforeach
         <center>
             <a wire:click.prevent="submit"
-               class="btn my-4 btn-outline btn-primary btn-xs dark:text-white cursor-pointer capitalize">@lang('save')</a>
+               class="btn my-4 btn-outline btn-primary btn-sm dark:text-white cursor-pointer capitalize">@lang('save')</a>
         </center>
     </div>
 </div>

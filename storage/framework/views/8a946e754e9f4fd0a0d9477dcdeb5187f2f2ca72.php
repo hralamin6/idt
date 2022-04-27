@@ -185,7 +185,7 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         <center>
             <a wire:click.prevent="submit"
-               class="btn my-4 btn-outline btn-primary btn-xs dark:text-white cursor-pointer capitalize"><?php echo app('translator')->get('save'); ?></a>
+               class="btn my-4 btn-outline btn-primary btn-sm dark:text-white cursor-pointer capitalize"><?php echo app('translator')->get('save'); ?></a>
         </center>
     </div>
 </div>
