@@ -32,7 +32,8 @@ class HeaderComponent extends Component
     public function logout()
     {
         session()->flush();
-            return redirect()->route('home');
+        Auth::logout();
+            return redirect()->route('login');
     }
     public function render()
     {

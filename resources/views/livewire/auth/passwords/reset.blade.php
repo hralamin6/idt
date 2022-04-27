@@ -3,9 +3,12 @@
 <div>
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
         <a href="{{ route('home') }}">
-            <x-logo class="w-auto h-16 mx-auto text-indigo-600" />
-        </a>
-
+            <div class="">
+                <center>
+                    <img class="h-10" src="{{\App\Models\Setup::first()->logo}}"  alt="logo">
+                    <span class="bg-transparent text-secondary p-2 rounded-md shadow-lg">ModestLife</span>
+                </center>
+            </div>
         <h2 class="mt-6 text-3xl font-extrabold text-center text-gray-900 leading-9">
             Reset password
         </h2>

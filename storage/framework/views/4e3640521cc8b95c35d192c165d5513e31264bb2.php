@@ -12,18 +12,18 @@
         <meta property="og:title" content="<?php echo $__env->yieldContent('title', 'Home Page'); ?> - <?php echo e(config('app.name')); ?>" />
         <meta property="og:description" content="<?php echo $__env->yieldContent('description', 'This is site Description'); ?> - <?php echo e(config('app.name')); ?>" />
         <meta property="og:url" content="<?php echo $__env->yieldContent('url', config('app.url')); ?>" />
-        <meta property="og:image" content="<?php echo $__env->yieldContent('image', $setup->getFirstMediaUrl('logo')); ?>" />
-        <meta property="og:image:secure_url" content="<?php echo $__env->yieldContent('image', $setup->getFirstMediaUrl('logo')); ?>" />
+        <meta property="og:image" content="<?php echo $__env->yieldContent('image', $setup->logo); ?>" />
+        <meta property="og:image:secure_url" content="<?php echo $__env->yieldContent('image', $setup->logo); ?>" />
         <meta property="og:site_name" content="<?php echo e(config('app.name')); ?>" />
         <meta property="og:image:width" content="1536" />
         <meta property="og:image:height" content="1024" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:description" content="<?php echo $__env->yieldContent('description', 'This is site Description'); ?> - <?php echo e(config('app.name')); ?>" />
         <meta name="twitter:title" content="<?php echo $__env->yieldContent('title', 'Home Page'); ?> - <?php echo e(config('app.name')); ?>" />
-        <meta name="twitter:image" content="<?php echo $__env->yieldContent('image', $setup->getFirstMediaUrl('logo')); ?>" />
+        <meta name="twitter:image" content="<?php echo $__env->yieldContent('image', $setup->logo); ?>" />
 
-        <link rel="shortcut icon" href="<?php echo e($setup->getFirstMediaUrl('logo')); ?>" type="image/x-icon">
-        <link rel="icon" href="<?php echo e($setup->getFirstMediaUrl('logo')); ?>" type="image/x-icon">
+        <link rel="shortcut icon" href="<?php echo e($setup->logo); ?>" type="image/x-icon">
+        <link rel="icon" href="<?php echo e($setup->logo); ?>" type="image/x-icon">
 
 
         <link rel="stylesheet" href="<?php echo e(asset('css/tw.css')); ?>">

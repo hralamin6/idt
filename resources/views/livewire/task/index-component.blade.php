@@ -101,7 +101,7 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
                     Feb
                 </div>
                 <div class="pt-1 border-l border-r">
-                    <span class="text-xl dark:text-white font-bold">{{\Carbon\Carbon::parse($date)->format('d')}}</span>
+                    <span class="text-xl dark:text-white font-bold" wire:loading.class="loading btn btn-sm">{{\Carbon\Carbon::parse($date)->format('d')}}</span>
                 </div>
                 <div class="pb-2 px-2 border-l border-r border-b rounded-b flex justify-between">
                     <span class="text-xs dark:text-gray-300 font-bold">{{\Carbon\Carbon::parse($date)->format('D')}}</span>
@@ -123,12 +123,12 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
                                       x-ref="text" name="{{$item->name}}" @if($ans[$i]==$item->id) checked
                                       @endif value="{{$item->id}}" type="checkbox" class="checkbox checkbox-primary dark:bg-gray-400">
                            </label>
-                        <p class="text-gray-600 md:text-lg lg:text-base text-sm w-10/12 dark:text-gray-300">{{$lang==='en'?$item->description:$item->description_bn}}</p>
+                        <p class="text-gray-600 md:text-lg lg:text-base text-sm w-10/12 dark:text-gray-300">{!! $lang==='en'?$item->description:$item->description_bn !!}</p>
                     </div>
             @endforeach
         <center>
             <a wire:click.prevent="submit"
-               class="btn my-4 btn-outline btn-primary btn-xs cursor-pointer capitalize">@lang('save')</a>
+               class="btn my-4 btn-outline btn-primary btn-xs dark:text-white cursor-pointer capitalize">@lang('save')</a>
         </center>
     </div>
 </div>

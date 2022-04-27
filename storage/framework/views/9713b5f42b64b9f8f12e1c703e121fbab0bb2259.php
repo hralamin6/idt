@@ -2,14 +2,12 @@
 
 <div>
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-
-
-
         <a href="<?php echo e(route('home')); ?>">
             <div class="">
-               <center>
-                   <span class="bg-transparent text-secondary p-2 rounded-md shadow-lg">Atom</span>
-               </center>
+                <center>
+                    <img class="h-10" src="<?php echo e(\App\Models\Setup::first()->logo); ?>"  alt="logo">
+                    <span class="bg-transparent text-secondary p-2 rounded-md shadow-lg">ModestLife</span>
+                </center>
             </div>
         </a>
 

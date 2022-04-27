@@ -12,18 +12,18 @@
         <meta property="og:title" content="@yield('title', 'Home Page') - {{config('app.name')}}" />
         <meta property="og:description" content="@yield('description', 'This is site Description') - {{config('app.name')}}" />
         <meta property="og:url" content="@yield('url', config('app.url'))" />
-        <meta property="og:image" content="@yield('image', $setup->getFirstMediaUrl('logo'))" />
-        <meta property="og:image:secure_url" content="@yield('image', $setup->getFirstMediaUrl('logo'))" />
+        <meta property="og:image" content="@yield('image', $setup->logo)" />
+        <meta property="og:image:secure_url" content="@yield('image', $setup->logo)" />
         <meta property="og:site_name" content="{{config('app.name')}}" />
         <meta property="og:image:width" content="1536" />
         <meta property="og:image:height" content="1024" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:description" content="@yield('description', 'This is site Description') - {{config('app.name')}}" />
         <meta name="twitter:title" content="@yield('title', 'Home Page') - {{config('app.name')}}" />
-        <meta name="twitter:image" content="@yield('image', $setup->getFirstMediaUrl('logo'))" />
+        <meta name="twitter:image" content="@yield('image', $setup->logo)" />
 
-        <link rel="shortcut icon" href="{{$setup->getFirstMediaUrl('logo')}}" type="image/x-icon">
-        <link rel="icon" href="{{$setup->getFirstMediaUrl('logo')}}" type="image/x-icon">
+        <link rel="shortcut icon" href="{{$setup->logo}}" type="image/x-icon">
+        <link rel="icon" href="{{$setup->logo}}" type="image/x-icon">
 {{--        <link rel="shortcut icon" href="{{ url(asset('favicon.ico')) }}">--}}
 {{--        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">--}}
         <link rel="stylesheet" href="{{ asset('css/tw.css') }}">

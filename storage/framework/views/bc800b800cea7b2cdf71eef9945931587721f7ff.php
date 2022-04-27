@@ -4,7 +4,7 @@
 
 
         <div class="">
-            <a class="" href="<?php echo e(route('home')); ?>"><img class="h-10" src="<?php echo e($setup->getFirstMediaUrl('logo')); ?>" onerror="<?php echo e(asset('frontend/images/logo.svg')); ?>" alt="logo"></a>
+            <a class="" href="<?php echo e(route('home')); ?>"><img class="h-10" src="<?php echo e($setup->logo); ?>"  alt="logo"></a>
         </div>
 
         <div class="flex justify-between gap-2">

@@ -4,7 +4,7 @@
 {{--            <button @click="nav= !nav" x-on:click.stop><x-h-o-menu class="w-5 md:hidden"/></button>--}}
 {{--        </div>--}}
         <div class="">
-            <a class="" href="{{route('home')}}"><img class="h-10" src="{{$setup->getFirstMediaUrl('logo')}}" onerror="{{asset('frontend/images/logo.svg')}}" alt="logo"></a>
+            <a class="" href="{{route('home')}}"><img class="h-10" src="{{$setup->logo}}"  alt="logo"></a>
         </div>
 
         <div class="flex justify-between gap-2">
