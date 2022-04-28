@@ -51,7 +51,7 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
         </div>
     </div>
         <div class="flex flex-col h-screen" x-data="{ hover: 0 }">
-            <div class="">
+            <div class="overflow-scroll scrollbar-none w-full">
                 <table class="relative w-full border dark:border-indigo-400 capitalize text-center text-xs lg:text-sm">
                     <thead class="">
                     <tr>
@@ -75,7 +75,7 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
                                         x-transition:leave="transition ease-in duration-300"
                                         x-transition:leave-start="opacity-100 transform scale-100"
                                         x-transition:leave-end="opacity-0 transform scale-90" x-cloak>
-                                        <span class="inline-block text-sm leading-tight"><?php echo $lang==='en'?$item->description:$item->description_bn; ?></span>
+                                        <span class="inline-block text-xs leading-tight"><?php echo $lang==='en'?$item->description:$item->description_bn; ?></span>
                                     </div>
                                 </div>
                             </th>
@@ -96,7 +96,7 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
                                 <td class="py-1 font-medium text-gray-900 border dark:border-indigo-400"> <?php if($task!=null): ?> <?php if(in_array($item->id, @$task->tasks)): ?>
                                        <span class="font-bold text-blue-600">&#10004</span>  <?php else: ?> &#10060 <?php endif; ?> <?php endif; ?> </td>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            <td class="py-1 font-medium text-gray-900 border dark:text-gray-200 dark:border-indigo-400"><?php echo e(@$point->point); ?></td>
+                            <td class="py-1 font-medium text-gray-900 border dark:text-gray-200 dark:border-indigo-400"><?php echo e(@$point->points); ?></td>
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <tr>

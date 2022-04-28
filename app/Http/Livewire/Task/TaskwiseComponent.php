@@ -13,21 +13,21 @@ use Illuminate\Support\Facades\Http;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
-class IndexComponent extends Component
+class TaskwiseComponent extends Component
 {
     use LivewireAlert;
     public $ans=[];
     public $tasks;
+    public $task;
     public $lang;
     public $date;
     public $point;
+    public $task_id;
     public $qurans=[];
 
-    public function mount()
+    public function mount($id)
     {
-        $sura = rand(10, 114);
-//        $this->qurans = Http::get('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/ben-muhiuddinkhan/'.$sura.'.json')->json();
-        $this->qurans = $this->qurans['chapter']??[];
+        $this->task_id = $id;
         $this->lang= App::getLocale();
         $this->tasks = $this->data;
         $this->date = Carbon::createFromFormat('Y-m-d', date('Y-m-d'));
@@ -36,6 +36,8 @@ class IndexComponent extends Component
 
     public function load()
     {
+        $this->task = Task::findOrFail($this->task_id);
+        $this->task = $this->task->taskcount($this->task_id, \Carbon\Carbon::parse($this->date)->format('m-Y'));
         $this->ans = array_fill(0, $this->tasks->count(), null);
         $task = TaskCount::where(['user_id'=> auth()->id(), 'date' => Carbon::parse($this->date)->format('Y-m-d')])->first();
         if ($task){
@@ -82,24 +84,6 @@ class IndexComponent extends Component
         $this->date->addDays(-1);
         $this->load();
     }
-    public function submit()
-    {
-
-            if ($this->ans !=null){
-                TaskCount::updateOrCreate(['user_id'=>auth()->id(), 'date' => Carbon::parse($this->date)->format('Y-m-d')], ['tasks' => $this->ans]);
-            }
-        $task_poing = TaskPoint::updateOrCreate(['user_id'=>auth()->id(), 'date' => Carbon::parse($this->date)->format('Y-m-d')], ['points' => count(array_filter($this->ans))]);
-                $points = $task_poing->points*5;
-                $this->point();
-        $this->alert('success', __('Congratulations! You got '.$points.' out of 100'), [
-            'position' => 'center',
-            'toast' => false,
-            'text' => __('best wishes for next day'),
-            'showCancelButton' => true,
-            'allowOutsideClick' => true,
-            'timer' => 5000,
-        ]);
-    }
     public function getDataProperty()
     {
         return Task::all();
@@ -109,6 +93,6 @@ class IndexComponent extends Component
 //       $status =  Cache::get('is_online'.auth()->id());
         $this->tasks = $this->data;
         $items = $this->data;
-        return view('livewire.task.index-component', compact('items'));
+        return view('livewire.task.taskwise-component', compact('items'));
     }
 }

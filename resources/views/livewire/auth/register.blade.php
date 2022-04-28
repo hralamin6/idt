@@ -69,18 +69,8 @@
                 </div>
 
                 <div class="mt-6">
-                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700 leading-5">
-                        Confirm Password
-                    </label>
-
-                    <div class="mt-1 rounded-md shadow-sm">
-                        <input wire:model.lazy="passwordConfirmation" id="password_confirmation" type="password" required class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                    </div>
-                </div>
-
-                <div class="mt-6">
                     <span class="block w-full rounded-md shadow-sm">
-                        <button wire:loading.class.add="loading" type="submit" class="btn btn-outline btn-primary btn-block btn-sm">
+                        <button wire:target="register" wire:loading.class.add="loading" type="submit" class="btn btn-outline btn-primary btn-block btn-sm">
                             Register
                         </button>
                     </span>

@@ -72,7 +72,7 @@
 
                 <div class="mt-6">
                     <span class="block w-full rounded-md shadow-sm">
-                        <button wire:loading.class.add="loading" type="submit" class="btn btn-outline btn-primary btn-block btn-sm">
+                        <button wire:target="authenticate" wire:loading.class.add="loading" type="submit" class="btn btn-outline btn-primary btn-block btn-sm">
                             Sign in
                         </button>
                     </span>

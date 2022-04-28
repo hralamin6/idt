@@ -3,31 +3,31 @@
         <?php (isset($this->numberOfPaginatorsRendered[$paginator->getPageName()]) ? $this->numberOfPaginatorsRendered[$paginator->getPageName()]++ : $this->numberOfPaginatorsRendered[$paginator->getPageName()] = 1); ?>
 
         <nav role="navigation" aria-label="Pagination Navigation" class="flex items-center justify-between  ">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
 
             <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between overflow-auto ">
                 <div>

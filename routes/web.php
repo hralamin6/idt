@@ -22,6 +22,9 @@ Route::middleware('auth')->group(function () {Route::get('email/verify', Verify:
 
 Route::middleware('auth')->group(function () {
     Route::get('/', \App\Http\Livewire\Task\IndexComponent::class)->name('home');
+    Route::get('/users', \App\Http\Livewire\Task\UserComponent::class)->name('users');
+    Route::get('/profile', \App\Http\Livewire\Task\DashboardComponent::class)->name('profile');
+    Route::get('/taskwise/{id}', \App\Http\Livewire\Task\TaskwiseComponent::class)->name('taskwise');
     Route::get('/monthly-task', \App\Http\Livewire\Task\MonthlyTask::class)->name('task.monthly');
     Route::get('email/verify/{id}/{hash}', EmailVerificationController::class)->middleware('signed')->name('verification.verify');
     Route::post('logout', LogoutController::class)->name('logout');

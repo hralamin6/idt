@@ -41,4 +41,31 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function points()
+    {
+        return $this->hasMany(TaskCount::class);
+    }
+    public function point()
+    {
+        $point = TaskPoint::where('user_id', $this->id)->sum('points');
+        return $point*5;
+    }
+    public function maxpoint()
+    {
+        $point = TaskPoint::where('user_id', $this->id)->max('points');
+        return $point*5;
+    }
+    public function minpoint()
+    {
+        $point = TaskPoint::where('user_id', $this->id)->min('points');
+        return $point*5;
+    }
+    public function avgpoint()
+    {
+        $from = \Carbon\Carbon::parse($this->created_at);
+        $to = \Carbon\Carbon::parse(now());
+        $diff = $to->diffInDays($from)+1;
+        $point = TaskPoint::where('user_id', $this->id)->sum('points');
+        return $diff>0?$point*5/$diff:$point*5;
+    }
 }

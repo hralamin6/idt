@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->date('date');
-            $table->double('point')->default(0);
+            $table->double('points')->default(0);
             $table->timestamps();
         });
     }

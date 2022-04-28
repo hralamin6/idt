@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             'type'=>'admin',
             'email'=>'hralamin2020@gmail.com',
             'email_verified_at' => now(),
+            'last_seen' => now(),
             'password'=>Hash::make('Qqqqqqqq1@')
         ]);
         \App\Models\Setup::factory(1)->create();

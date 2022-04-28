@@ -23,7 +23,7 @@ class HeaderComponent extends Component
                 session(['my_locale' => 'en']);
             }
         }else{
-            session()->put('my_locale', 'bn');
+            session()->put('my_locale', 'en');
         }
         return redirect()->to(url()->previous());
 
