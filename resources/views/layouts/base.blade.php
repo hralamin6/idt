@@ -25,7 +25,7 @@
         <link rel="shortcut icon" href="{{$setup->logo}}" type="image/x-icon">
         <link rel="icon" href="{{$setup->logo}}" type="image/x-icon">
 {{--        <link rel="shortcut icon" href="{{ url(asset('favicon.ico')) }}">--}}
-{{--        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">--}}
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
         <link rel="stylesheet" href="{{ asset('css/tw.css') }}">
         <link rel="stylesheet" href="{{ url(mix('css/app.css')) }}">
         @stack('css')

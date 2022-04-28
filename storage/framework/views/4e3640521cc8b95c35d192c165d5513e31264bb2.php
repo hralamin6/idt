@@ -25,7 +25,7 @@
         <link rel="shortcut icon" href="<?php echo e($setup->logo); ?>" type="image/x-icon">
         <link rel="icon" href="<?php echo e($setup->logo); ?>" type="image/x-icon">
 
-
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
         <link rel="stylesheet" href="<?php echo e(asset('css/tw.css')); ?>">
         <link rel="stylesheet" href="<?php echo e(url(mix('css/app.css'))); ?>">
         <?php echo $__env->yieldPushContent('css'); ?>

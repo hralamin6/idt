@@ -23,7 +23,7 @@ class SetupFactory extends Factory
     {
         return [
             'about' => $this->faker->word(1),
-            'logo' => 'http://lorempixel.com/300/100/nature/'.rand(1, 9).'/'
+            'logo' => 'https://i.ibb.co/YdvSNB8/images-removebg-preview.png'
         ];
     }
 }

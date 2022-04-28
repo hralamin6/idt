@@ -1,5 +1,5 @@
 <header class="w-full h-14 bg-lightHeader dark:bg-darkSidebar border-b dark:border-gray-600" x-data="{search: false}">
-    <div class="flex justify-between gap-6 p-4 relative inline-block">
+    <div class="flex justify-between gap-6 p-2 relative inline-block">
 
 
 
@@ -7,7 +7,7 @@
             <a class="" href="<?php echo e(route('home')); ?>"><img class="h-10" src="<?php echo e($setup->logo); ?>"  alt="logo"></a>
         </div>
 
-        <div class="flex justify-between gap-2">
+        <div class="flex justify-between gap-2 my-auto">
             <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'components.m','data' => ['route' => 'home']] + (isset($attributes) ? (array) $attributes->getIterator() : [])); ?>
 <?php $component->withName('m'); ?>
@@ -76,7 +76,7 @@
 
         </div>
 
-        <div class="flex justify-end space-x-8 md:space-x-12 text-gray-600 dark:text-gray-200 text-sm font-bold z-0" :class="{'hidden': search}">
+        <div class="flex justify-end space-x-4 md:space-x-12 text-gray-600 dark:text-gray-200 text-sm font-bold z-0 my-auto" :class="{'hidden': search}">
             <a wire:click.prevent="ChangeLang" class="cursor-pointer"><?php if (isset($component)) { $__componentOriginalcd9972c8156dfa6e5fd36675ca7bf5f21b506e2e = $component; } ?>
 <?php $component = $__env->getContainer()->make(BladeUI\Icons\Components\Svg::class, [] + (isset($attributes) ? (array) $attributes->getIterator() : [])); ?>
 <?php $component->withName('h-o-translate'); ?>

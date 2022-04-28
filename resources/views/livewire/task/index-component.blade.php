@@ -26,7 +26,12 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
     $dates[] = \Carbon\Carbon::createFromDate($today->year, $today->month, $i)->format('Y-m-d');
 }
     @endphp
-    <div class='w-full lg:w-1/2 max-w-lg mx-auto bg-white rounded-2xl shadow-xl flex flex-col mt-3 p-3 dark:text-gray-300 dark:bg-darkSidebar'>
+    <marquee class="dark:text-green-300 dark:bg-gray-600 bg-gray-200 text-purple-500">
+        @foreach($qurans as $i=> $quran)
+       <span>{{$quran['text']}}</span>
+        @endforeach
+    </marquee>
+        <div class='w-full lg:w-1/2 max-w-lg mx-auto bg-white rounded-2xl shadow-xl flex flex-col mt-3 p-3 dark:text-gray-300 dark:bg-darkSidebar'>
         <div class="flex justify-between pb-4">
             <div class="cursor-pointer">
                 <a class="text-gray-500 dark:text-gray-300" wire:click.prevent="prevMonth">
@@ -82,7 +87,7 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
                 @endphp
                 <span wire:click.prevent="dateChange({{\Carbon\Carbon::parse($d)->format('d')}})"
                       class="lg:w-14 w-12 @if(\Carbon\Carbon::parse($d)->format('d')==01) {{$col_span}} @endif @if(\Carbon\Carbon::parse($d)->format('d')==\Carbon\Carbon::parse($date)->format('d')) text-white bg-green-500 rounded-2xl @endif
-                          flex justify-center items-center border dark:border-purple-400 hover:border-green-500 hover:text-green-500 cursor-pointer">
+                          flex justify-center items-center border dark:border-purple-400 hover:border-green-500 cursor-pointer">
                     {{\Carbon\Carbon::parse($d)->format('d')}}
                 </span>
             @endforeach
@@ -90,8 +95,8 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
 
     </div>
     <div class="items-center lg:w-1/2 m-auto">
-        <div class="flex justify-between gap-4 p-4">
-            <div class="cursor-pointer">
+        <div class="flex justify-between gap-4 px-4 pt-3">
+            <div class="cursor-pointer my-auto">
                 <a class="text-gray-500 dark:text-gray-300" wire:click.prevent="prevDate">
                     <x-h-o-arrow-left class="w-5"/>
                 </a>
@@ -108,7 +113,7 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
                     <span class="text-xs dark:text-gray-300 font-bold">{{\Carbon\Carbon::parse($date)->format('Y')}}</span>
                 </div>
             </div>
-            <div class="cursor-pointer">
+            <div class="cursor-pointer my-auto">
                 <a class="text-gray-500 dark:text-gray-300" wire:click.prevent="nextDate">
                     <x-h-o-arrow-right class="w-5"/>
                 </a>
@@ -118,7 +123,7 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
                     <div class="w-full px-6 mx-auto mt-5 bg-white dark:bg-darkSidebar rounded-md  border border-gray-200 dark:border-purple-500  sm:px-8 md:px-12 sm:py-4 py-2 sm:rounded-lg sm:shadow">
                           <label class="label cursor-pointer justify-end my-auto flex justify-between">
                                <h3  class="text-lg font-bold sm:text-xl md:text-2xl align-middle" :class="ans[{{$i}}]!=null?'text-green-500 line-through': 'text-pink-500 text' ">{{$lang==='en'?$item->name:$item->name_bn}}</h3>
-                               <input id="{{$item->id}}"
+                               <input id="{{$item->id}}"  @if(\Carbon\Carbon::parse($date)->format('d')!=date('d')) disabled @endif
                                       @click="if(ans[{{$i}}]==null){ans[{{$i}}]=$el.value}else{ans[{{$i}}]=null};console.log($el.value)"
                                       x-ref="text" name="{{$item->name}}" @if($ans[$i]==$item->id) checked
                                       @endif value="{{$item->id}}" type="checkbox" class="checkbox checkbox-primary dark:bg-gray-400">
@@ -126,9 +131,11 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
                         <p class="text-gray-600 md:text-lg lg:text-base text-sm w-10/12 dark:text-gray-300">{!! $lang==='en'?$item->description:$item->description_bn !!}</p>
                     </div>
             @endforeach
+        @if(\Carbon\Carbon::parse($date)->format('d')==date('d'))
         <center>
-            <a wire:click.prevent="submit"
+            <a wire:click.prevent="submit" Wire:target="submit" wire:loading.class="loading"
                class="btn my-4 btn-outline btn-primary btn-sm dark:text-white cursor-pointer capitalize">@lang('save')</a>
         </center>
+        @endif
     </div>
 </div>

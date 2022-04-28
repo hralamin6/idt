@@ -29,7 +29,12 @@ class DatabaseSeeder extends Seeder
             'password'=>Hash::make('Qqqqqqqq1@')
         ]);
         \App\Models\Setup::factory(1)->create();
-        \App\Models\Task::factory(10)->create();
+
+        $path = base_path().'/database/tasks.sql';
+        $sql = file_get_contents($path);
+        DB::unprepared($sql);
+
+//        \App\Models\Task::factory(10)->create();
 
         // \App\Models\User::factory(10)->create();
 //        \App\Models\Quiz::factory(10)->create()->each(function ($quiz) {

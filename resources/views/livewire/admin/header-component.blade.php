@@ -1,5 +1,5 @@
 <header class="w-full h-14 bg-lightHeader dark:bg-darkSidebar border-b dark:border-gray-600" x-data="{search: false}">
-    <div class="flex justify-between gap-6 p-4 relative inline-block">
+    <div class="flex justify-between gap-6 p-2 relative inline-block">
 {{--        <div class="flex justify-start space-x-4 md:space-x-9 text-gray-500 dark:text-gray-200 text-sm z-0" :class="{'hidden': search}">--}}
 {{--            <button @click="nav= !nav" x-on:click.stop><x-h-o-menu class="w-5 md:hidden"/></button>--}}
 {{--        </div>--}}
@@ -7,7 +7,7 @@
             <a class="" href="{{route('home')}}"><img class="h-10" src="{{$setup->logo}}"  alt="logo"></a>
         </div>
 
-        <div class="flex justify-between gap-2">
+        <div class="flex justify-between gap-2 my-auto">
             <x-m :route="'home'"> Home</x-m>
             <x-m :route="'task.monthly'"> Monthly</x-m>
         </div>
@@ -22,7 +22,7 @@
 
         </div>
 
-        <div class="flex justify-end space-x-8 md:space-x-12 text-gray-600 dark:text-gray-200 text-sm font-bold z-0" :class="{'hidden': search}">
+        <div class="flex justify-end space-x-4 md:space-x-12 text-gray-600 dark:text-gray-200 text-sm font-bold z-0 my-auto" :class="{'hidden': search}">
             <a wire:click.prevent="ChangeLang" class="cursor-pointer"><x-h-o-translate   class="w-5"/></a>
             <a class="cursor-pointer" @click="dark=!dark"><x-h-o-sun x-cloak x-show="dark" class="w-5"/><x-h-o-moon x-cloak x-show="!dark" class="w-5"/></a>
             @guest

@@ -8,6 +8,7 @@ use App\Models\TaskPoint;
 use Illuminate\Support\Carbon;
 //use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Http;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
@@ -18,9 +19,13 @@ class IndexComponent extends Component
     public $tasks;
     public $lang;
     public $date;
+    public $qurans=[];
 
     public function mount()
     {
+        $sura = rand(10, 114);
+        $this->qurans = Http::get('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/ben-muhiuddinkhan/'.$sura.'.json')->json();
+        $this->qurans = $this->qurans['chapter']??[];
         $this->lang= App::getLocale();
         $this->tasks = $this->data;
         $this->date = Carbon::createFromFormat('Y-m-d', date('Y-m-d'));
@@ -69,12 +74,20 @@ class IndexComponent extends Component
     }
     public function submit()
     {
-        $points = 0;
+
             if ($this->ans !=null){
                 TaskCount::updateOrCreate(['user_id'=>auth()->id(), 'date' => Carbon::parse($this->date)->format('Y-m-d')], ['tasks' => $this->ans]);
             }
-        TaskPoint::updateOrCreate(['user_id'=>auth()->id(), 'date' => Carbon::parse($this->date)->format('Y-m-d')], ['point' => count(array_filter($this->ans))]);
-        $this->alert('success', __('Practise successfully finished'));
+        $task_poing = TaskPoint::updateOrCreate(['user_id'=>auth()->id(), 'date' => Carbon::parse($this->date)->format('Y-m-d')], ['point' => count(array_filter($this->ans))]);
+                $points = $task_poing->point*5;
+        $this->alert('success', __('Congratulations! You got '.$points.' out of 100'), [
+            'position' => 'center',
+            'toast' => false,
+            'text' => __('best wishes for next day'),
+            'showCancelButton' => true,
+            'allowOutsideClick' => true,
+            'timer' => 5000,
+        ]);
     }
     public function getDataProperty()
     {
@@ -82,7 +95,6 @@ class IndexComponent extends Component
     }
     public function render()
     {
-//        dd(date('Y-m-d'));
         $this->tasks = $this->data;
         $items = $this->data;
         return view('livewire.task.index-component', compact('items'));
