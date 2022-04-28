@@ -19,12 +19,13 @@ class IndexComponent extends Component
     public $tasks;
     public $lang;
     public $date;
+    public $point;
     public $qurans=[];
 
     public function mount()
     {
         $sura = rand(10, 114);
-        $this->qurans = Http::get('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/ben-muhiuddinkhan/'.$sura.'.json')->json();
+//        $this->qurans = Http::get('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/ben-muhiuddinkhan/'.$sura.'.json')->json();
         $this->qurans = $this->qurans['chapter']??[];
         $this->lang= App::getLocale();
         $this->tasks = $this->data;
@@ -41,7 +42,15 @@ class IndexComponent extends Component
             foreach ($task->tasks as $i => $task){
                 $this->ans[$i] = $task>0?$task:null ;
             }
-            }
+
+        }
+        $this->point();
+    }
+
+    public function point()
+    {
+        $point = TaskPoint::where('user_id', auth()->id())->where('date', Carbon::parse($this->date)->format('Y-m-d'))->first();
+        $this->point = $point?$point->point*5:null;
     }
 
     public function dateChange($d)
@@ -80,6 +89,7 @@ class IndexComponent extends Component
             }
         $task_poing = TaskPoint::updateOrCreate(['user_id'=>auth()->id(), 'date' => Carbon::parse($this->date)->format('Y-m-d')], ['point' => count(array_filter($this->ans))]);
                 $points = $task_poing->point*5;
+                $this->point();
         $this->alert('success', __('Congratulations! You got '.$points.' out of 100'), [
             'position' => 'center',
             'toast' => false,

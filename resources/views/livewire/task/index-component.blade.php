@@ -102,9 +102,7 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
                 </a>
             </div>
             <div class="block rounded-t overflow-hidden bg-white dark:bg-darkSidebar text-center w-24">
-                <div class="bg-red-500 text-white py-1">
-                    Feb
-                </div>
+                <div class="bg-red-500 text-white py-1">{{\Carbon\Carbon::parse($date)->format('M')}}</div>
                 <div class="pt-1 border-l border-r">
                     <span class="text-xl dark:text-white font-bold" wire:loading.class="loading btn btn-sm">{{\Carbon\Carbon::parse($date)->format('d')}}</span>
                 </div>
@@ -119,11 +117,16 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
                 </a>
             </div>
         </div>
+        @if($point!=null)
+        <a  href="{{route('home')}}" class="flex w-1/2 mt-2 mx-auto justify-center p-2 bg-white rounded-lg space-x-2 shadow-lg dark:bg-gray-800">
+            <p class="text-lg font-semibold dark:text-gray-300 text-gray-600 badge badge-info">@lang('Points:') <span class="dark:text-purple-300 text-purple-500">{{@$point}}</span>/<span class="dark:text-green-300 text-green-500">100</span></p>
+        </a>
+        @endif
             @foreach($items as $i => $item)
                     <div class="w-full px-6 mx-auto mt-5 bg-white dark:bg-darkSidebar rounded-md  border border-gray-200 dark:border-purple-500  sm:px-8 md:px-12 sm:py-4 py-2 sm:rounded-lg sm:shadow">
                           <label class="label cursor-pointer justify-end my-auto flex justify-between">
                                <h3  class="text-lg font-bold sm:text-xl md:text-2xl align-middle" :class="ans[{{$i}}]!=null?'text-green-500 line-through': 'text-pink-500 text' ">{{$lang==='en'?$item->name:$item->name_bn}}</h3>
-                               <input id="{{$item->id}}"  @if(\Carbon\Carbon::parse($date)->format('d')!=date('d')) disabled @endif
+                               <input id="{{$item->id}}"  @if(\Carbon\Carbon::parse($date)->format('d-m-Y')!=date('d-m-Y')) disabled @endif
                                       @click="if(ans[{{$i}}]==null){ans[{{$i}}]=$el.value}else{ans[{{$i}}]=null};console.log($el.value)"
                                       x-ref="text" name="{{$item->name}}" @if($ans[$i]==$item->id) checked
                                       @endif value="{{$item->id}}" type="checkbox" class="checkbox checkbox-primary dark:bg-gray-400">
@@ -131,7 +134,7 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
                         <p class="text-gray-600 md:text-lg lg:text-base text-sm w-10/12 dark:text-gray-300">{!! $lang==='en'?$item->description:$item->description_bn !!}</p>
                     </div>
             @endforeach
-        @if(\Carbon\Carbon::parse($date)->format('d')==date('d'))
+        @if(\Carbon\Carbon::parse($date)->format('d-m-Y')==date('d-m-Y'))
         <center>
             <a wire:click.prevent="submit" Wire:target="submit" wire:loading.class="loading"
                class="btn my-4 btn-outline btn-primary btn-sm dark:text-white cursor-pointer capitalize">@lang('save')</a>
