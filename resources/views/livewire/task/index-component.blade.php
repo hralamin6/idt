@@ -126,7 +126,8 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
                     <div class="w-full px-6 mx-auto mt-5 bg-white dark:bg-darkSidebar rounded-md  border border-gray-200 dark:border-purple-500  sm:px-8 md:px-12 sm:py-4 py-2 sm:rounded-lg sm:shadow">
                           <label class="label cursor-pointer justify-end my-auto flex justify-between">
                                <h3  class="text-lg font-bold sm:text-xl md:text-2xl align-middle" :class="ans[{{$i}}]!=null?'text-green-500 line-through': 'text-pink-500 text' ">{{$lang==='en'?$item->name:$item->name_bn}}</h3>
-                               <input id="{{$item->id}}"  @if(\Carbon\Carbon::parse($date)->format('d-m-Y')!=date('d-m-Y')) disabled @endif
+                               <input id="{{$item->id}}"
+                                      @if(\Carbon\Carbon::parse($date)->format('d-m-Y')!=date('d-m-Y')) disabled @endif
                                       @click="if(ans[{{$i}}]==null){ans[{{$i}}]=$el.value}else{ans[{{$i}}]=null};console.log($el.value)"
                                       x-ref="text" name="{{$item->name}}" @if($ans[$i]==$item->id) checked
                                       @endif value="{{$item->id}}" type="checkbox" class="checkbox checkbox-primary dark:bg-gray-400">

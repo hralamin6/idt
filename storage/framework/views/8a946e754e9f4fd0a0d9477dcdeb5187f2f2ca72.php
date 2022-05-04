@@ -183,7 +183,8 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
                     <div class="w-full px-6 mx-auto mt-5 bg-white dark:bg-darkSidebar rounded-md  border border-gray-200 dark:border-purple-500  sm:px-8 md:px-12 sm:py-4 py-2 sm:rounded-lg sm:shadow">
                           <label class="label cursor-pointer justify-end my-auto flex justify-between">
                                <h3  class="text-lg font-bold sm:text-xl md:text-2xl align-middle" :class="ans[<?php echo e($i); ?>]!=null?'text-green-500 line-through': 'text-pink-500 text' "><?php echo e($lang==='en'?$item->name:$item->name_bn); ?></h3>
-                               <input id="<?php echo e($item->id); ?>"  <?php if(\Carbon\Carbon::parse($date)->format('d-m-Y')!=date('d-m-Y')): ?> disabled <?php endif; ?>
+                               <input id="<?php echo e($item->id); ?>"
+
                                       @click="if(ans[<?php echo e($i); ?>]==null){ans[<?php echo e($i); ?>]=$el.value}else{ans[<?php echo e($i); ?>]=null};console.log($el.value)"
                                       x-ref="text" name="<?php echo e($item->name); ?>" <?php if($ans[$i]==$item->id): ?> checked
                                       <?php endif; ?> value="<?php echo e($item->id); ?>" type="checkbox" class="checkbox checkbox-primary dark:bg-gray-400">
@@ -191,12 +192,12 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
                         <p class="text-gray-600 md:text-lg lg:text-base text-sm w-10/12 dark:text-gray-300"><?php echo $lang==='en'?$item->description:$item->description_bn; ?></p>
                     </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-        <?php if(\Carbon\Carbon::parse($date)->format('d-m-Y')==date('d-m-Y')): ?>
+
         <center>
             <a wire:click.prevent="submit" Wire:target="submit" wire:loading.class="loading"
                class="btn my-4 btn-outline btn-primary btn-sm dark:text-white cursor-pointer capitalize"><?php echo app('translator')->get('save'); ?></a>
         </center>
-        <?php endif; ?>
+
     </div>
 </div>
 <?php /**PATH C:\xampp\htdocs\idt\resources\views/livewire/task/index-component.blade.php ENDPATH**/ ?>

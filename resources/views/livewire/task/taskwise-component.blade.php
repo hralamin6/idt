@@ -26,11 +26,12 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
     $dates[] = \Carbon\Carbon::createFromDate($today->year, $today->month, $i)->format('Y-m-d');
 }
     @endphp
-    <marquee class="dark:text-green-300 dark:bg-gray-600 bg-gray-200 text-purple-500">
-        @foreach($qurans as $i=> $quran)
-            <span>{{$quran['text']}}</span>
-        @endforeach
-    </marquee>
+{{--    <marquee class="dark:text-green-300 dark:bg-gray-600 bg-gray-200 text-purple-500">--}}
+{{--        @foreach($qurans as $i=> $quran)--}}
+{{--            <span>{{$quran['text']}}</span>--}}
+{{--        @endforeach--}}
+{{--    </marquee>--}}
+    <center><span class="font-semibold text-pink-500 dark:text-pink-200">{{$lang==='en'?\App\Models\Task::find($task_id)->name:\App\Models\Task::find($task_id)->name_bn}}</span></center>
     <div
         class='w-full lg:w-1/2 max-w-lg mx-auto bg-white rounded-2xl shadow-xl flex flex-col mt-3 p-3 dark:text-gray-300 dark:bg-darkSidebar'>
         <div class="flex justify-between pb-4">
@@ -47,65 +48,66 @@ for($i=1; $i < $today->daysInMonth + 1; ++$i) {
                 </a>
             </div>
         </div>
-        <div class="flex justify-between font-medium uppercase text-xs pt-4 pb-2 border-t dark:border-gray-500">
-            <span
-                class="px-1 lg:px-3 border rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">sat</span>
-            <span
-                class="px-1 lg:px-3 border rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">sun</span>
-            <span
-                class="px-1 lg:px-3 border rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">mon</span>
-            <span
-                class="px-1 lg:px-3 border rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">tue</span>
-            <span
-                class="px-1 lg:px-3 border rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">wed</span>
-            <span
-                class="px-1 lg:px-3 border rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">thu</span>
-            <span
-                class="px-1 lg:px-3 border  rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">fri</span>
-        </div>
+{{--        <div class="flex justify-between font-medium uppercase text-xs pt-4 pb-2 border-t dark:border-gray-500">--}}
+{{--            <span--}}
+{{--                class="px-1 lg:px-3 border rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">sat</span>--}}
+{{--            <span--}}
+{{--                class="px-1 lg:px-3 border rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">sun</span>--}}
+{{--            <span--}}
+{{--                class="px-1 lg:px-3 border rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">mon</span>--}}
+{{--            <span--}}
+{{--                class="px-1 lg:px-3 border rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">tue</span>--}}
+{{--            <span--}}
+{{--                class="px-1 lg:px-3 border rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">wed</span>--}}
+{{--            <span--}}
+{{--                class="px-1 lg:px-3 border rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">thu</span>--}}
+{{--            <span--}}
+{{--                class="px-1 lg:px-3 border  rounded-sm w-14 h-5 flex items-center justify-center border-green-500 text-green-500 shadow-md">fri</span>--}}
+{{--        </div>--}}
 
         <div class="grid grid-cols-7 justify-between font-medium text-sm pb-2 ">
 
-            @foreach($dates as $i=> $d)
-                @php
-                    if(\Carbon\Carbon::parse($d)->format('d')==01){
-                    if(\Carbon\Carbon::parse($d)->format('D')==='Sun'){
-                        $col_span = 'col-start-2';
-                    }elseif (\Carbon\Carbon::parse($d)->format('D')==='Mon'){
-                        $col_span = 'col-start-3';
-                    }elseif (\Carbon\Carbon::parse($d)->format('D')==='Tue'){
-                        $col_span = 'col-start-4';
-                    }elseif (\Carbon\Carbon::parse($d)->format('D')==='Wed'){
-                        $col_span = 'col-start-5';
-                    }elseif (\Carbon\Carbon::parse($d)->format('D')==='Thu'){
-                        $col_span = 'col-start-6';
-                    }elseif (\Carbon\Carbon::parse($d)->format('D')==='Fri'){
-                        $col_span = 'col-start-7';
-                    }else{
-                        $col_span = 'col-start-1';
-                    }
-}
-                @endphp
+{{--            @foreach($dates as $i=> $d)--}}
+{{--                @php--}}
+{{--                    if(\Carbon\Carbon::parse($d)->format('d')==01){--}}
+{{--                    if(\Carbon\Carbon::parse($d)->format('D')==='Sun'){--}}
+{{--                        $col_span = 'col-start-2';--}}
+{{--                    }elseif (\Carbon\Carbon::parse($d)->format('D')==='Mon'){--}}
+{{--                        $col_span = 'col-start-3';--}}
+{{--                    }elseif (\Carbon\Carbon::parse($d)->format('D')==='Tue'){--}}
+{{--                        $col_span = 'col-start-4';--}}
+{{--                    }elseif (\Carbon\Carbon::parse($d)->format('D')==='Wed'){--}}
+{{--                        $col_span = 'col-start-5';--}}
+{{--                    }elseif (\Carbon\Carbon::parse($d)->format('D')==='Thu'){--}}
+{{--                        $col_span = 'col-start-6';--}}
+{{--                    }elseif (\Carbon\Carbon::parse($d)->format('D')==='Fri'){--}}
+{{--                        $col_span = 'col-start-7';--}}
+{{--                    }else{--}}
+{{--                        $col_span = 'col-start-1';--}}
+{{--                    }--}}
+{{--}--}}
+{{--$vone = [1, 2 ,3];--}}
+{{--$vtwo = [1, 2 ,3];--}}
+{{--                @endphp--}}
                 @foreach ($task as $j => $t)
-                    @if (\Carbon\Carbon::parse($t->date)->format('d')==\Carbon\Carbon::parse($d)->format('d'))
-                        <span wire:click.prevent="dateChange({{\Carbon\Carbon::parse($d)->format('d')}})"
-                              class="lg:w-14 w-12 @if(\Carbon\Carbon::parse($d)->format('d')==01) {{$col_span}} @endif text-white bg-green-500 rounded-2xl
+                    <span
+                          class="lg:w-14 w-12 text-white  bg-green-500 rounded-2xl
                                   flex justify-center items-center border dark:border-purple-400 hover:border-green-500 cursor-pointer">
-                    {{\Carbon\Carbon::parse($d)->format('d')}}
-                </span>                @else
-                        <span wire:click.prevent="dateChange({{\Carbon\Carbon::parse($d)->format('d')}})"
-                              class="lg:w-14 w-12 @if(\Carbon\Carbon::parse($d)->format('d')==01) {{$col_span}} @endif text-white bg-red-500 rounded-2xl
-                                  flex justify-center items-center border dark:border-purple-400 hover:border-green-500 cursor-pointer">
-                    {{\Carbon\Carbon::parse($d)->format('d')}}
-                </span>                @endif
-                @endforeach
-                @if($task->count()==0)<span wire:click.prevent="dateChange({{\Carbon\Carbon::parse($d)->format('d')}})"
-                                      class="lg:w-14 w-12 @if(\Carbon\Carbon::parse($d)->format('d')==01) {{$col_span}} @endif
-                                          flex justify-center items-center border dark:border-purple-400 hover:border-green-500 cursor-pointer">
-                    {{\Carbon\Carbon::parse($d)->format('d')}}
+                    {{\Carbon\Carbon::parse($t)->format('d')}}
                 </span>
-                @endif
                 @endforeach
+{{--                <span wire:click.prevent="dateChange({{\Carbon\Carbon::parse($d)->format('d')}})"--}}
+{{--                      class="lg:w-14 w-12 @if(\Carbon\Carbon::parse($d)->format('d')==01) {{$col_span}} @endif text-white  @if(in_array(array($task), $dates)) bg-green-500 @else bg-red-500 @endif rounded-2xl--}}
+{{--                                  flex justify-center items-center border dark:border-purple-400 hover:border-green-500 cursor-pointer">--}}
+{{--                    {{\Carbon\Carbon::parse($d)->format('d')}}--}}
+{{--                </span>--}}
+                {{--                                @if($task->count()==0)<span wire:click.prevent="dateChange({{\Carbon\Carbon::parse($d)->format('d')}})"--}}
+                {{--                                                      class="lg:w-14 w-12 @if(\Carbon\Carbon::parse($d)->format('d')==01) {{$col_span}} @endif--}}
+                {{--                                                          flex justify-center items-center border dark:border-purple-400 hover:border-green-500 cursor-pointer">--}}
+                {{--                                    {{\Carbon\Carbon::parse($d)->format('d')}}--}}
+                {{--                                </span>--}}
+                {{--                                @endif--}}
+{{--            @endforeach--}}
         </div>
 
     </div>

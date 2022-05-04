@@ -38,6 +38,7 @@ class TaskwiseComponent extends Component
     {
         $this->task = Task::findOrFail($this->task_id);
         $this->task = $this->task->taskcount($this->task_id, \Carbon\Carbon::parse($this->date)->format('m-Y'));
+//       dd( $this->task);
         $this->ans = array_fill(0, $this->tasks->count(), null);
         $task = TaskCount::where(['user_id'=> auth()->id(), 'date' => Carbon::parse($this->date)->format('Y-m-d')])->first();
         if ($task){

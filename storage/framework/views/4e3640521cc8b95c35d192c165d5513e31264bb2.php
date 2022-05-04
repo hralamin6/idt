@@ -34,6 +34,8 @@
         <script src="<?php echo e(url(mix('js/app.js'))); ?>" defer></script>
         <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
         <?php echo $__env->yieldPushContent('js'); ?>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2561735618453583"
+                crossorigin="anonymous"></script>
     </head>
 
     <body>

@@ -21,7 +21,8 @@ class Task extends Model
     public function taskcount($id, $date)
     {
         $parts = explode('-', $date);
-        return  TaskCount::whereMonth('date', '=', $parts[0])->whereYear('date', '=', $parts[1])->whereUserId(auth()->id())->whereJsonContains('tasks', ''.$id.'')->get();
+        return  TaskCount::whereMonth('date', '=', $parts[0])->whereYear('date', '=', $parts[1])->whereUserId(auth()->id())->whereJsonContains('tasks', ''.$id.'')->orderBy('date', 'asc')->pluck('date')->map(function ($date, $key) {
+            return date('Y-m-d', strtotime($date));
+    })->toArray();
     }
-
 }
